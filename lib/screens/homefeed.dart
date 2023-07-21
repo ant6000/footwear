@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/Items_widget.dart';
-import '../widgets/categories_widgets.dart';
+import '../widgets/Items_card.dart';
+import '../widgets/categories.dart';
 
-class NewsFeed extends StatelessWidget {
-  const NewsFeed({super.key});
+class HomeFeed extends StatelessWidget {
+  const HomeFeed({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  ListView(
       children: [
         Container(
-          padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
+          padding: const EdgeInsets.all(8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 "Categories",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -42,8 +42,8 @@ class NewsFeed extends StatelessWidget {
             ],
           ),
         ),
-        const MyWidgets(),
-        const Itemswidget(),
+        const CategoriesWidgets(),
+        const ItemsCardWidget(),
       ],
     );
   }

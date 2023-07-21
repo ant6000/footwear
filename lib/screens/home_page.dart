@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:footwear/widgets/categories_widgets.dart';
-import '../widgets/Items_widget.dart';
+import 'package:footwear/screens/favourites.dart';
+import 'package:footwear/screens/homefeed.dart';
+import 'package:footwear/screens/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +12,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  Widget activePage = const HomePage();
 
   @override
   Widget build(BuildContext context) {
+    Widget activePage = const HomeFeed();
+    if (currentIndex == 1) {
+      activePage = const Favourites();
+    }
+    if (currentIndex == 2) {
+      activePage = const HomeFeed();
+    }
+    if (currentIndex == 3) {
+      activePage = const Settings();
+    }
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.list),
@@ -39,56 +49,18 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Categories",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      'Sort by',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    GestureDetector(
-                      child: const Icon(
-                        Icons.arrow_drop_down_sharp,
-                        size: 40,
-                      ),
-                      onTap: () {
-                        print('sortby');
-                      },
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          const MyWidgets(),
-          const Itemswidget(),
-        ],
-      ),
+      body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
         ],
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -97,23 +69,5 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentIndex = index;
     });
-
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/');
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/favourite');
-        break;
-      case 2:
-        //Navigator.pushNamed(context, '/settng');
-        break;
-      case 3:
-        Navigator.pushNamed(context, '/settng');
-        break;
-      default:
-        Navigator.pushNamed(context, '/');
-        break;
-    }
   }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/settings.dart';
-import 'screens/card.dart';
 import 'screens/home_page.dart';
-import 'widgets/Items_widget.dart';
 
 void main() {
   runApp(const MainApp());

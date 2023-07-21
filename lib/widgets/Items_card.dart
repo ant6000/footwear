@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Itemswidget extends StatelessWidget {
-  const Itemswidget({super.key});
+class ItemsCardWidget extends StatelessWidget {
+  const ItemsCardWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
       childAspectRatio: .6,
-      physics: ScrollPhysics(),
+      physics: const ScrollPhysics(),
       children: [
         for (int i = 1; i < 10; i++)
           Container(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.white10,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyWidgets extends StatelessWidget {
-  const MyWidgets({super.key});
+class CategoriesWidgets extends StatelessWidget {
+  const CategoriesWidgets({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class MyWidgets extends StatelessWidget {
                   },
                   child: Row(
                     children: [
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Image.asset(
                         'images/snikers1.png',
                         height: 40,
