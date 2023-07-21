@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/settings.dart';
+import 'package:provider/provider.dart';
+import 'provider/porduct_provider.dart';
 import 'screens/home_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(create: (context) => ProductProvider(),
+  child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -15,7 +18,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,
       routes: {

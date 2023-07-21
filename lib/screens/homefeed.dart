@@ -18,15 +18,30 @@ class HomeFeed extends StatelessWidget {
               const Text(
                 "Categories",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                        offset: Offset(2, 2)),
+                  ],
+                ),
               ),
               Row(
                 children: [
                   const Text(
                     'Sort by',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                      fontSize: 20,
+                      shadows: [
+                        Shadow(
+                            color: Colors.black12,
+                            blurRadius: 10,
+                            offset: Offset(2, 2)),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     child: const Icon(
@@ -58,12 +73,12 @@ class HomeFeed extends StatelessWidget {
         GridView.count(
           crossAxisCount: 2,
           shrinkWrap: true,
-          childAspectRatio: .8,
+          childAspectRatio: .65,
           scrollDirection: Axis.vertical,
           physics: const ScrollPhysics(),
           children: [
-            for (int i = 1; i <= 10; i++) 
-            const CustomCard(),
+            for (int i = 1; i <= 10; i++)
+             const CustomCard(),
           ],
         )
       ],

@@ -27,8 +27,17 @@ class _HomePageState extends State<HomePage> {
     }
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.list),
-        title: const Text("Nike"),
+        leading: const Icon(Icons.electric_bolt, color: Colors.amber),
+        title: const Text(
+          'Nike',
+          style: TextStyle(shadows: [
+            Shadow(
+              color: Colors.black45,
+              blurRadius: 5,
+              offset: Offset(1, 2),
+            ),
+          ]),
+        ),
         centerTitle: false,
         actions: [
           Padding(
