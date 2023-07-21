@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/Items_card.dart';
 import '../widgets/categories.dart';
+import '../widgets/custom_card.dart';
 
 class HomeFeed extends StatelessWidget {
   const HomeFeed({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  ListView(
+    return ListView(
       children: [
-        Container(
-          padding: const EdgeInsets.all(8),
+        Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,8 +42,30 @@ class HomeFeed extends StatelessWidget {
             ],
           ),
         ),
-        const CategoriesWidgets(),
-        const ItemsCardWidget(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: [
+              for (int i = 1; i < 10; i++)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 20, left: 10),
+                  child: CategoriesWidgets(),
+                ),
+            ],
+          ),
+        ),
+        GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          childAspectRatio: .8,
+          scrollDirection: Axis.vertical,
+          physics: const ScrollPhysics(),
+          children: [
+            for (int i = 1; i <= 10; i++) 
+            const CustomCard(),
+          ],
+        )
       ],
     );
   }

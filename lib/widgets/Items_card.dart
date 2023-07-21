@@ -7,7 +7,8 @@ class ItemsCardWidget extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
-      childAspectRatio: .6,
+      childAspectRatio: .8,
+      scrollDirection: Axis.vertical,
       physics: const ScrollPhysics(),
       children: [
         for (int i = 1; i < 10; i++)
@@ -15,7 +16,7 @@ class ItemsCardWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.white10,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
