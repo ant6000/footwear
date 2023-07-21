@@ -10,7 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int selected_index = 0;
+  int currentIndex = 0;
+  Widget activePage = const HomePage();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.blue,
         unselectedItemColor: Colors.grey,
-        currentIndex: selected_index,
+        currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      selected_index = index;
+      currentIndex = index;
     });
 
     switch (index) {
