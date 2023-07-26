@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/catagory_model.dart';
 
 class CategoriesWidgets extends StatelessWidget {
-  const CategoriesWidgets({super.key});
+  final CatagoryModel catagoryModel;
+  const CategoriesWidgets({required this.catagoryModel, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,13 @@ class CategoriesWidgets extends StatelessWidget {
               width: 10,
             ),
             Image.asset(
-              'images/snikers1.png',
+              catagoryModel.imageUrl,
               height: 40,
               width: 40,
             ),
-            const Text(
-              'Sniker',
-              style: TextStyle(fontSize: 25),
+             Text(
+              catagoryModel.name,
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),

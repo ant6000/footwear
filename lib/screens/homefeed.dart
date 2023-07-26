@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/catagory_model.dart';
+import 'package:footwear/provider/porduct_provider.dart';
+import 'package:footwear/widgets/custom_card.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/categories.dart';
-import '../widgets/custom_card.dart';
+import '../widgets/size_selector.dart';
 
-class HomeFeed extends StatelessWidget {
+class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
+
+  @override
+  State<HomeFeed> createState() => _HomeFeedState();
+}
+
+class _HomeFeedState extends State<HomeFeed> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPersistentFrameCallback((timeStamp) {
+      final provider = Provider.of<ProductProvider>(context, listen: false);
+      provider.getAllProductsData();
+    });
+  }
+
+   List<CatagoryModel> categoriesList= [];
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +41,6 @@ class HomeFeed extends StatelessWidget {
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                        color: Colors.black,
-                        blurRadius: 10,
-                        offset: Offset(2, 2)),
-                  ],
                 ),
               ),
               Row(
@@ -57,30 +71,51 @@ class HomeFeed extends StatelessWidget {
             ],
           ),
         ),
-        SingleChildScrollView(
+        ListView(
           scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          child: Row(
-            children: [
-              for (int i = 1; i < 10; i++)
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 20, left: 10),
-                  child: CategoriesWidgets(),
-                ),
-            ],
-          ),
+          children: [CategoriesWidgets(catagoryModel:categoriesList[10] )],
         ),
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          childAspectRatio: .65,
-          scrollDirection: Axis.vertical,
-          physics: const ScrollPhysics(),
-          children: [
-            for (int i = 1; i <= 10; i++)
-             const CustomCard(),
-          ],
-        )
+        GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  childAspectRatio: .6,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              shrinkWrap: true,
+              itemCount: categoriesList.length,
+              scrollDirection: Axis.vertical,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) => CategoriesWidgets(
+                    catagoryModel:getCategoriesList[index],
+                  )),
+        // SingleChildScrollView(
+        //   scrollDirection: Axis.horizontal,
+        //   physics: const BouncingScrollPhysics(),
+        //   child: Row(
+        //     children: [
+        //       for (int i = 1; i < 10; i++)
+        //          Padding(
+        //           padding:const EdgeInsets.only(bottom: 20, left: 10),
+        //           child: CategoriesWidgets(catagoryModel:getCategoriesList[i]),
+        //         ),
+        //     ],
+        //   ),
+        // ),
+        Consumer<ProductProvider>(builder: (context, productPorvider, child) {
+          return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: .6,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              shrinkWrap: true,
+              itemCount: productPorvider.getProductList.length,
+              scrollDirection: Axis.vertical,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) => CustomCard(
+                    productModel: productPorvider.getProductList[index],
+                  ));
+        })
       ],
     );
   }

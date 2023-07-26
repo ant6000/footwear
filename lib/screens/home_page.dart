@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/settings.dart';
+import 'package:footwear/widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +13,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
+  Widget activePage = const HomeFeed();
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = const HomeFeed();
     if (currentIndex == 1) {
       activePage = const Favourites();
     }
@@ -28,34 +29,35 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.electric_bolt, color: Colors.amber),
-        title: const Text(
-          'Nike',
-          style: TextStyle(shadows: [
-            Shadow(
-              color: Colors.black45,
-              blurRadius: 5,
-              offset: Offset(1, 2),
-            ),
-          ]),
-        ),
-        centerTitle: false,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: Badge(
-              label: const Text('3'),
-              backgroundColor: Colors.green,
-              child: InkWell(
-                onTap: () {
-                  print('badge');
-                },
-                child: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.purple,
+          Row(
+            children: [
+              const Text(
+                'Nike',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: ItemSearchBar(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 15, left: 10),
+                child: Badge(
+                  label: const Text('3'),
+                  backgroundColor: Colors.green,
+                  child: InkWell(
+                    onTap: () {
+                      print('badge');
+                    },
+                    child: const Icon(
+                      Icons.shopping_cart,
+                      color: Colors.purple,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          )
+            ],
+          ),
         ],
       ),
       body: activePage,

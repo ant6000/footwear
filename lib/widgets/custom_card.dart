@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/products_model.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+  const CustomCard({super.key, required ProductModel productModel});
 
   @override
   Widget build(BuildContext context) {
