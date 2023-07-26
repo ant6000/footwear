@@ -5,7 +5,6 @@ import 'package:footwear/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/categories.dart';
-import '../widgets/size_selector.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -24,8 +23,7 @@ class _HomeFeedState extends State<HomeFeed> {
     });
   }
 
-   List<CatagoryModel> categoriesList= [];
-
+  List<CatagoryModel> categoriesList = getCategoriesList;
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -71,50 +69,51 @@ class _HomeFeedState extends State<HomeFeed> {
             ],
           ),
         ),
-        ListView(
-          scrollDirection: Axis.horizontal,
-          children: [CategoriesWidgets(catagoryModel:categoriesList[10] )],
-        ),
-        GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  childAspectRatio: .6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              shrinkWrap: true,
-              itemCount: categoriesList.length,
-              scrollDirection: Axis.vertical,
-              physics: const ScrollPhysics(),
-              itemBuilder: (context, index) => CategoriesWidgets(
-                    catagoryModel:getCategoriesList[index],
-                  )),
+
         // SingleChildScrollView(
         //   scrollDirection: Axis.horizontal,
-        //   physics: const BouncingScrollPhysics(),
         //   child: Row(
         //     children: [
-        //       for (int i = 1; i < 10; i++)
-        //          Padding(
-        //           padding:const EdgeInsets.only(bottom: 20, left: 10),
-        //           child: CategoriesWidgets(catagoryModel:getCategoriesList[i]),
+        //       for (int i = 0; i < categoriesList.length; i++)
+        //         Padding(
+        //           padding: const EdgeInsets.all(10.0),
+        //           child: CategoriesWidgets(catagoryModel: categoriesList[i]),
         //         ),
         //     ],
         //   ),
         // ),
+        Container(
+          height: 50,
+          child: GridView.builder(
+              padding: EdgeInsets.only(bottom: 10,left: 10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                childAspectRatio: .25,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              //shrinkWrap: true,
+              itemCount: categoriesList.length,
+              scrollDirection: Axis.horizontal,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  CategoriesWidgets(catagoryModel: categoriesList[index])),
+        ),
         Consumer<ProductProvider>(builder: (context, productPorvider, child) {
           return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              shrinkWrap: true,
-              itemCount: productPorvider.getProductList.length,
-              scrollDirection: Axis.vertical,
-              physics: const ScrollPhysics(),
-              itemBuilder: (context, index) => CustomCard(
-                    productModel: productPorvider.getProductList[index],
-                  ));
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: .6,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10),
+            shrinkWrap: true,
+            itemCount: productPorvider.getProductList.length,
+            scrollDirection: Axis.vertical,
+            physics: const ScrollPhysics(),
+            itemBuilder: (context, index) => CustomCard(
+              productModel: productPorvider.getProductList[index],
+            ),
+          );
         })
       ],
     );

@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   const CustomCard({super.key, required ProductModel productModel});
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  bool _isFavorite = false;
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +55,11 @@ class CustomCard extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const Icon(Icons.favorite_border),
+                  InkWell(
+                      onTap: _toggleFavorite,
+                       child:  Icon(
+                        _isFavorite? Icons.favorite : Icons.favorite_border,
+                        color: _isFavorite ? Colors.pink : Colors.black,)),
                 ],
               ),
             ),
