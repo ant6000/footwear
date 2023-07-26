@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/products_model.dart';
 import 'package:footwear/widgets/image_slider.dart';
 import 'package:footwear/widgets/size_selector.dart';
 
@@ -41,10 +42,12 @@ class _ProductDetailsState extends State<ProductDetails> {
       // double screenHeight = MediaQuery.of(context).size.height;
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const ImageSlider(),
+              const SizedBox(height: 10),
               Text(
                 'Nike Air Max 200',
                 style: TextStyle(
@@ -61,40 +64,27 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Text(
                     'Size: ',
                     style: TextStyle(fontSize: 20),
                   ),
-                  for (int i = 1; i < 5; i++)
-                  SizeSilector(),
                   // for (int i = 1; i < 5; i++)
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(2.0),
-                  //     child: ElevatedButton(
-                  //         onPressed: _toggleSelection,
-                  //         style: ElevatedButton.styleFrom(
-                  //           backgroundColor:
-                  //               _isSelected ? Colors.blue : Colors.white,
-                  //           padding: const EdgeInsets.symmetric(
-                  //               horizontal: 20, vertical: 10),
-                  //           shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(8),
-                  //           ),
-                  //         ),
-                  //         child: Text('US  ${5 + i}')),
-                  //   ),
+                  // const Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 10),
+                  //   child: Selector(),
+                  // ),
+                  Selector(),
                 ],
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     'Available Colors: ',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
                   for (int i = 0; i < 4; i++)
@@ -107,29 +97,25 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               ),
               const SizedBox(height: 10),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                     const Text(
-                      'Price: 500.00\$',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   const Text(
+                    'Price: 500.00\$',
+                    style: TextStyle(
+                      fontSize: 30,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Row(
-                        children: [
-                          Icon(Icons.shopping_cart),
-                          Text('Add to Cart')
-                        ],
-                      ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Icon(Icons.shopping_cart),
+                        Text('Add to Cart')
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )
             ],
           ),
