@@ -27,6 +27,7 @@ class CategoriesWidgets extends StatelessWidget {
           print('hello');
         },
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const SizedBox(
               width: 10,

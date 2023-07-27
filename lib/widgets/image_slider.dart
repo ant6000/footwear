@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/products_model.dart';
+
 class ImageSlider extends StatefulWidget {
-  const ImageSlider({super.key});
+  final ProductModel model;
+  const ImageSlider({required this.model, super.key});
 
   @override
   _ImageSliderState createState() => _ImageSliderState();
@@ -24,6 +27,7 @@ class _ImageSliderState extends State<ImageSlider> {
 
   @override
   Widget build(BuildContext context) {
+    ProductModel productModel = widget.model;
     return Column(
       children: [
         SizedBox(
@@ -32,7 +36,7 @@ class _ImageSliderState extends State<ImageSlider> {
             itemCount: images.length,
             itemBuilder: (context, index) {
               return Image.asset(
-                images[index],
+                productModel.imageUrl,
                 fit: BoxFit.cover,
               );
             },

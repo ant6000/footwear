@@ -4,7 +4,8 @@ import 'package:footwear/widgets/image_slider.dart';
 import 'package:footwear/widgets/size_selector.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+  final ProductModel model;
+  const ProductDetails({required this.model, super.key});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -27,6 +28,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    ProductModel pmodel = widget.model;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nike'),
@@ -46,10 +48,10 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageSlider(),
+               ImageSlider(model:pmodel),
               const SizedBox(height: 10),
               Text(
-                'Nike Air Max 200',
+                pmodel.title,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.08,
                     fontWeight: FontWeight.bold),
@@ -100,8 +102,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   const Text(
-                    'Price: 500.00\$',
+                  Text(
+                    'Price: ${pmodel.price}',
                     style: TextStyle(
                       fontSize: 30,
                     ),

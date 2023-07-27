@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
+import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/screens/product_details.dart';
+import 'package:provider/provider.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({super.key, required ProductModel productModel});
-
+  final ProductModel productModel;
+  const CustomCard({
+    super.key,
+    required this.productModel,
+  });
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
@@ -18,13 +23,20 @@ class _CustomCardState extends State<CustomCard> {
   }
 
   void _gotoDetailsPage() {
+    ProductModel mm = widget.productModel;
     setState(() {
-      Navigator.push(context,MaterialPageRoute(builder: (context) => ProductDetails()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                    model: mm,
+                  )));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ProductModel model = widget.productModel;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: InkWell(
@@ -46,7 +58,8 @@ class _CustomCardState extends State<CustomCard> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                padding:
+                    const EdgeInsets.only(left: 10, right: 10, top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -67,7 +80,9 @@ class _CustomCardState extends State<CustomCard> {
                     InkWell(
                         onTap: _toggleFavorite,
                         child: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_border,
+                          _isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                           color: _isFavorite ? Colors.pink : Colors.black,
                         )),
                   ],
@@ -85,23 +100,23 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ),
                   Image.asset(
-                    'images/snikers1.png',
+                    model.imageUrl,
                     width: 220,
                     height: 150,
                   )
                 ],
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Snikers',
+              Text(
+                model.title,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const Text(
                 'Comfortable and felxible',
                 style: TextStyle(fontSize: 15),
               ),
-              const Text(
-                '100.00\$',
+              Text(
+                '\$${model.price.toString()}',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
