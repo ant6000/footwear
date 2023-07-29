@@ -5,7 +5,7 @@ import 'package:footwear/widgets/product_size_selector.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel model;
-  const ProductDetails({required this.model, super.key});
+  const ProductDetails({super.key,required this.model});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();

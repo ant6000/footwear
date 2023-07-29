@@ -68,7 +68,6 @@ class _HomeFeedState extends State<HomeFeed> {
             ],
           ),
         ),
-
         SizedBox(
           height: 50,
           child: GridView.builder(
@@ -94,12 +93,10 @@ class _HomeFeedState extends State<HomeFeed> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10),
             shrinkWrap: true,
-            itemCount: productPorvider.getProductList.length,
+            itemCount: productPorvider.productListP.length,
             scrollDirection: Axis.vertical,
             physics: const ScrollPhysics(),
-            itemBuilder: (context, index) => CustomCard(
-              productModel: productPorvider.getProductList[index],
-            ),
+            itemBuilder: (context, index) => CustomCard(index: index),
           );
         })
       ],
