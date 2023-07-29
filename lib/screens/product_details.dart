@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
 import 'package:footwear/widgets/image_slider.dart';
-import 'package:footwear/widgets/size_selector.dart';
+import 'package:footwear/widgets/product_size_selector.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel model;
@@ -65,10 +65,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
               const SizedBox(height: 10),
-              Row(
+              const Row(
                 //mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Size: ',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -104,7 +104,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 children: [
                   Text(
                     'Price: ${pmodel.price}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                     ),
                   ),

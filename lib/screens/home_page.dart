@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
-import 'package:footwear/screens/settings.dart';
+import 'package:footwear/screens/test.dart';
 import 'package:footwear/widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,19 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  Widget activePage = const HomeFeed();
 
   @override
   Widget build(BuildContext context) {
-    if (currentIndex == 1) {
-      activePage = const Favourites();
-    }
-    if (currentIndex == 2) {
-      activePage = const HomeFeed();
-    }
-    if (currentIndex == 3) {
-      activePage = const Settings();
-    }
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.electric_bolt, color: Colors.amber),
@@ -60,12 +50,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: activePage,
+      body: _buildBody(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
-        onTap: _onItemTapped,
+        onTap: (value) {
+          _onItemTapped(value);},
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
@@ -76,9 +67,27 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
+  Widget _buildBody(int currentIndex) {
+    switch (currentIndex) {
+      case 0:
+        return const HomeFeed();
+      case 1:
+        return const Favourites();
+      case 2:
+        return const MyWidget3();
+      case 3:
+        return const HomeFeed();
+      default:
+        return const SizedBox.shrink(); // This is just a fallback, you can replace it with any other widget.
+    }
+  }
+
+  void _onItemTapped(int value) {
+    {
+      // Check if the widget is still mounted before calling setState
+      setState(() {
+        currentIndex = value;
+      });
+    }
   }
 }

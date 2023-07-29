@@ -3,8 +3,7 @@ import 'package:footwear/model/catagory_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/categories.dart';
+import 'package:footwear/widgets/categories.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -17,7 +16,7 @@ class _HomeFeedState extends State<HomeFeed> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPersistentFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final provider = Provider.of<ProductProvider>(context, listen: false);
       provider.getAllProductsData();
     });
@@ -70,22 +69,10 @@ class _HomeFeedState extends State<HomeFeed> {
           ),
         ),
 
-        // SingleChildScrollView(
-        //   scrollDirection: Axis.horizontal,
-        //   child: Row(
-        //     children: [
-        //       for (int i = 0; i < categoriesList.length; i++)
-        //         Padding(
-        //           padding: const EdgeInsets.all(10.0),
-        //           child: CategoriesWidgets(catagoryModel: categoriesList[i]),
-        //         ),
-        //     ],
-        //   ),
-        // ),
-        Container(
+        SizedBox(
           height: 50,
           child: GridView.builder(
-              padding: EdgeInsets.only(bottom: 10,left: 10),
+              padding: const EdgeInsets.only(bottom: 10, left: 10),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 childAspectRatio: .25,
