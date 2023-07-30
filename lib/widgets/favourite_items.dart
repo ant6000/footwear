@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
+import 'package:footwear/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
-class FavItems extends StatefulWidget {
-  const FavItems({super.key});
+class FavItems extends StatelessWidget {
+  final int index;
+  const FavItems({required this.index, super.key});
 
-  @override
-  State<FavItems> createState() => _FavItemsState();
-}
-
-class _FavItemsState extends State<FavItems> {
   @override
   Widget build(BuildContext context) {
-  ProductProvider provider =Provider.of<ProductProvider>(context, listen: false);
+    final ProductProvider provider =
+        Provider.of<ProductProvider>(context, listen: false);
+    final List<ProductModel> favoriteProducts = provider.favouriteProductList;
+    final ProductModel product = favoriteProducts[index];
     return InkWell(
+      onTap: () {
+       
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
         child: Container(
@@ -30,23 +34,23 @@ class _FavItemsState extends State<FavItems> {
                   offset: Offset(7, 10),
                 )
               ]),
-          child: const Column(
+          child: Column(
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('images/snikers1.png'),
+                backgroundImage: AssetImage(product.imageUrl),
               ),
-              SizedBox(height: 0),
+              const SizedBox(height: 0),
               Text(
-                'provider',
-                style: TextStyle(
+                product.title,
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
               Text(
-                '1000.00',
-                style: TextStyle(
+                product.price.toString(),
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),

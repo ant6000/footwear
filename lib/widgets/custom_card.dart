@@ -7,8 +7,14 @@ import 'package:provider/provider.dart';
 class CustomCard extends StatelessWidget {
   final int index;
   const CustomCard({super.key, required this.index});
+
   void _addToFavourites(ProductProvider provider, int productId) {
     provider.addToFavourites(productId);
+  }
+
+  void _navigateProductDetailsPage(BuildContext context, ProductProvider provider, ProductModel model, bool favourite) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ProductDetails( provider: provider, model: model, isfavourite: favourite,index: index,)));
   }
 
   @override
@@ -20,7 +26,9 @@ class CustomCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          _navigateProductDetailsPage(context, provider, product, product.isFavorite);
+        },
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -58,7 +66,7 @@ class CustomCard extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          _addToFavourites(provider,product.productId);
+                          _addToFavourites(provider, product.productId);
                         },
                         child: Icon(
                           product.isFavorite

@@ -4,8 +4,10 @@ import 'package:footwear/model/products_model.dart';
 class ProductProvider extends ChangeNotifier {
   List<ProductModel> _productList = [];
   List<ProductModel> get productListP => _productList;
-  List<ProductModel> _favouriteProductList = [];
+  final List<ProductModel> _favouriteProductList = [];
   List<ProductModel> get favouriteProductList => _favouriteProductList;
+  final List<ProductModel> _cartList = [];
+  List<ProductModel> get cartlist => _cartList;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -37,4 +39,10 @@ class ProductProvider extends ChangeNotifier {
     _favouriteProductList.remove(productListP[index]);
   }
 
+  void addToCart(int index) {
+    _cartList.add(cartlist[index]);
+  }
+  void removeFromCart(int index) {
+    _cartList.remove(cartlist[index]);
+  }
 }

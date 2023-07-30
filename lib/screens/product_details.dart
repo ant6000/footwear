@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
+import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/image_slider.dart';
 import 'package:footwear/widgets/product_size_selector.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetails extends StatelessWidget {
+  final ProductProvider provider;
   final ProductModel model;
-  const ProductDetails({super.key,required this.model});
+  final bool isfavourite;
+  final int index;
+  ProductDetails(
+      {super.key,
+      required this.provider,
+      required this.model,
+      required this.isfavourite,
+      required this.index});
 
-  @override
-  State<ProductDetails> createState() => _ProductDetailsState();
-}
-
-class _ProductDetailsState extends State<ProductDetails> {
   final List<Color> colors = [
     Colors.red,
     Colors.green,
     Colors.blue,
     Colors.yellow,
   ];
-  bool _isSelected = false;
 
-  void _toggleSelection() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
+  void _addToFavourites(ProductProvider provider, int productId) {
+    provider.addToFavourites(productId);
   }
 
   @override
   Widget build(BuildContext context) {
-    ProductModel pmodel = widget.model;
+    // ProductModel pmodel = model;
+    //     ProductProvider provider =
+    //     Provider.of<ProductProvider>(context, listen: false);
+    //final productId = provider.productListP[index];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nike'),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              _addToFavourites(provider, model.productId);
+            },
+            icon: Icon(
+              model.isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: model.isFavorite ? Colors.pink : Colors.black,
+            ),
           )
         ],
       ),
@@ -48,10 +57,10 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               ImageSlider(model:pmodel),
+              ImageSlider(model: model),
               const SizedBox(height: 10),
               Text(
-                pmodel.title,
+                model.title,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.08,
                     fontWeight: FontWeight.bold),
@@ -103,7 +112,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Price: ${pmodel.price}',
+                    'Price: ${model.price}',
                     style: const TextStyle(
                       fontSize: 30,
                     ),

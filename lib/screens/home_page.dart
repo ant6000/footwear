@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
-import 'package:footwear/screens/test.dart';
+import 'package:footwear/screens/cart.dart';
 import 'package:footwear/widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
+  bool _isBottomSheetOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.green,
                   child: InkWell(
                     onTap: () {
+                      _toggleBottomSheet();
                       print('badge');
                     },
                     child: const Icon(
@@ -56,7 +58,8 @@ class _HomePageState extends State<HomePage> {
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
         onTap: (value) {
-          _onItemTapped(value);},
+          _onItemTapped(value);
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
@@ -74,11 +77,12 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return const Favourites();
       case 2:
-        return const MyWidget3();
+        return const Cart();
       case 3:
         return const HomeFeed();
       default:
-        return const SizedBox.shrink(); // This is just a fallback, you can replace it with any other widget.
+        return const SizedBox
+            .shrink(); // This is just a fallback, you can replace it with any other widget.
     }
   }
 
@@ -89,5 +93,29 @@ class _HomePageState extends State<HomePage> {
         currentIndex = value;
       });
     }
+  }
+
+  void _toggleBottomSheet() {
+    setState(() {
+      _isBottomSheetOpen = !_isBottomSheetOpen;
+    });
+
+    if (_isBottomSheetOpen) {
+      _showBottomSheet();
+    } else {
+      _closeBottomSheet();
+    }
+  }
+
+  void _showBottomSheet() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Cart(),
+        ));
+  }
+
+  void _closeBottomSheet() {
+    Navigator.of(context).pop();
   }
 }
