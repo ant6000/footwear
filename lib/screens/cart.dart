@@ -10,13 +10,13 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('cart'),
+        title: const Text('cart'),
         centerTitle: true,
       ),
       body: Consumer<ProductProvider>(
         builder: (BuildContext context, favprovider, child) {
           return ListView.builder(
-              itemCount: 10,
+              itemCount: favprovider.cartlist.length,
               itemBuilder: (context, index) {
                 return const SingleCart();
               });

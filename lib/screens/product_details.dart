@@ -3,6 +3,7 @@ import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/image_slider.dart';
 import 'package:footwear/widgets/product_size_selector.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatelessWidget {
   final ProductProvider provider;
@@ -29,10 +30,8 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ProductModel pmodel = model;
-    //     ProductProvider provider =
-    //     Provider.of<ProductProvider>(context, listen: false);
-    //final productId = provider.productListP[index];
+    // ProductProvider provider =
+    //Provider.of<ProductProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nike'),
@@ -86,7 +85,6 @@ class ProductDetails extends StatelessWidget {
                   //   padding: EdgeInsets.symmetric(horizontal: 10),
                   //   child: Selector(),
                   // ),
-                  Selector(),
                 ],
               ),
               const SizedBox(height: 10),
@@ -118,7 +116,10 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print('clicked');
+                      provider.addToCart(index);
+                    },
                     child: const Row(
                       children: [
                         Icon(Icons.shopping_cart),

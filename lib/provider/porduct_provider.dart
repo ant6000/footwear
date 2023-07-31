@@ -11,6 +11,8 @@ class ProductProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool _isCartOpen = true;
+  bool get isCartOpen => _isCartOpen;
 
   getAllProductsData() {
     _isLoading = true;
@@ -39,10 +41,19 @@ class ProductProvider extends ChangeNotifier {
     _favouriteProductList.remove(productListP[index]);
   }
 
-  void addToCart(int index) {
-    _cartList.add(cartlist[index]);
+  bool toggleCart() {
+    _isCartOpen = !_isCartOpen;
+    notifyListeners();
+    return _isCartOpen;
   }
+
+  void addToCart(int index) {
+    _cartList.add(productListP[index]);
+    notifyListeners();
+  }
+
   void removeFromCart(int index) {
-    _cartList.remove(cartlist[index]);
+    _cartList.remove(productListP[index]);
+    notifyListeners();
   }
 }

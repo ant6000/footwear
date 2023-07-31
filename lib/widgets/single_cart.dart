@@ -8,7 +8,7 @@ class SingleCart extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
-        height: 120,
+        height: 130,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.amber,

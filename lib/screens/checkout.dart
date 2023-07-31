@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({super.key});
+class CheckOut extends StatelessWidget {
+  const CheckOut({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
         child: Text(
-      'Settings',
+      'CheckOut',
       style: TextStyle(fontSize: 40),
     ));
   }

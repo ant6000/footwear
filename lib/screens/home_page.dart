@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/cart.dart';
 import 'package:footwear/widgets/search_bar.dart';
+import 'package:provider/provider.dart';
+
+import 'checkout.dart';
+import 'settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  bool _isBottomSheetOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +37,28 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15, left: 10),
-                child: Badge(
-                  label: const Text('3'),
-                  backgroundColor: Colors.green,
-                  child: InkWell(
-                    onTap: () {
-                      _toggleBottomSheet();
-                      print('badge');
-                    },
-                    child: const Icon(
-                      Icons.shopping_cart,
-                      color: Colors.purple,
-                    ),
-                  ),
+                child: Consumer<ProductProvider>(
+                  builder: (BuildContext context, provider, child) {
+                    return Badge(
+                      label:
+                           Text(provider.cartlist.length.toString()),
+                      backgroundColor: Colors.green,
+                      child: InkWell(
+                        onTap: () {
+                          if (provider.toggleCart()) {
+                            _closeCart();
+                          }
+                          if (provider.toggleCart()) {
+                            _showCart();
+                          }
+                        },
+                        child: const Icon(
+                          Icons.shopping_cart,
+                          color: Colors.purple,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -77,9 +90,9 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return const Favourites();
       case 2:
-        return const Cart();
+        return const CheckOut();
       case 3:
-        return const HomeFeed();
+        return const Settings();
       default:
         return const SizedBox
             .shrink(); // This is just a fallback, you can replace it with any other widget.
@@ -88,26 +101,13 @@ class _HomePageState extends State<HomePage> {
 
   void _onItemTapped(int value) {
     {
-      // Check if the widget is still mounted before calling setState
       setState(() {
         currentIndex = value;
       });
     }
   }
 
-  void _toggleBottomSheet() {
-    setState(() {
-      _isBottomSheetOpen = !_isBottomSheetOpen;
-    });
-
-    if (_isBottomSheetOpen) {
-      _showBottomSheet();
-    } else {
-      _closeBottomSheet();
-    }
-  }
-
-  void _showBottomSheet() {
+  void _showCart() {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  void _closeBottomSheet() {
+  void _closeCart() {
     Navigator.of(context).pop();
   }
 }
