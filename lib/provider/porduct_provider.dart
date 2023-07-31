@@ -56,4 +56,37 @@ class ProductProvider extends ChangeNotifier {
     _cartList.remove(productListP[index]);
     notifyListeners();
   }
+
+  double calculateTotalPrice() {
+    double totalPrice = 0.0;
+    for (var product in cartlist) {
+      totalPrice += product.price;
+    }
+    notifyListeners();
+    return totalPrice;
+  }
+
+  int quantity = 1;
+  int increaseQuantity(int id) {
+    //print(id);
+    int updateQuantity = 1;
+    int index = cartlist[id].productId;
+    print(index);
+    quantity = quantity + updateQuantity;
+    notifyListeners();
+    return quantity;
+  }
+
+  int decreaseQuantity() {
+    quantity -= 1;
+    notifyListeners();
+    return quantity;
+  }
+
+  double increamentPrice(ProductModel model) {
+    double price = model.price;
+    price *= quantity;
+    notifyListeners();
+    return price;
+  }
 }

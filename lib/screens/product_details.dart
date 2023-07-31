@@ -117,7 +117,6 @@ class ProductDetails extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print('clicked');
                       provider.addToCart(index);
                     },
                     child: const Row(
