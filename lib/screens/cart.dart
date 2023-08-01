@@ -9,16 +9,17 @@ class Cart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
-      builder: (BuildContext context, favprovider, child) {
+      builder: (BuildContext context, provider, Widget? child) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('cart'),
             centerTitle: true,
           ),
           body: ListView.builder(
-              itemCount: favprovider.cartlist.length,
+              physics: ScrollPhysics(),
+              itemCount: provider.cartlist.length,
               itemBuilder: (context, index) {
-                return  SingleCart(index: index,);
+                return SingleCart(index: index);
               }),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -38,7 +39,8 @@ class Cart extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                   Text('Total: ${favprovider.calculateTotalPrice()}',
+                  Text(
+                    "provider.totalPrice()",
                     style: TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(

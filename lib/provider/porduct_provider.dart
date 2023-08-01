@@ -57,7 +57,19 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double calculateTotalPrice() {
+
+
+  quantityIncrement(int id) {
+    final index = _productList.indexWhere((product) => product.productId == id);
+    _cartList[index].quantity++;
+    notifyListeners();
+  }
+    quantityDecrement(int id) {
+    final index = _productList.indexWhere((product) => product.productId == id);
+    _cartList[index].quantity--;
+    notifyListeners();
+  }
+   calculateTotalPrice() {
     double totalPrice = 0.0;
     for (var product in cartlist) {
       totalPrice += product.price;
@@ -65,28 +77,5 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
     return totalPrice;
   }
-
-  int quantity = 1;
-  int increaseQuantity(int id) {
-    //print(id);
-    int updateQuantity = 1;
-    int index = cartlist[id].productId;
-    print(index);
-    quantity = quantity + updateQuantity;
-    notifyListeners();
-    return quantity;
-  }
-
-  int decreaseQuantity() {
-    quantity -= 1;
-    notifyListeners();
-    return quantity;
-  }
-
-  double increamentPrice(ProductModel model) {
-    double price = model.price;
-    price *= quantity;
-    notifyListeners();
-    return price;
-  }
+  
 }

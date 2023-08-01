@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'List'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
         ],
       ),
