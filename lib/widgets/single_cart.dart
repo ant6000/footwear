@@ -117,7 +117,7 @@ class SingleCart extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          provider.quantityIncrement(productModel.productId);
+                          provider.quantityIncrement(index);
                         },
                         icon: const Icon(Icons.add)),
                     Text(
@@ -126,7 +126,7 @@ class SingleCart extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () {
-                          provider.quantityDecrement(productModel.productId);
+                          provider.quantityDecrement(index);
                         },
                         icon: const Icon(Icons.remove)),
                   ],

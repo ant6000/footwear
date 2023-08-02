@@ -59,13 +59,13 @@ class ProductProvider extends ChangeNotifier {
 
 
 
-  quantityIncrement(int id) {
-    final index = _productList.indexWhere((product) => product.productId == id);
+  quantityIncrement(int index) {
+    //final index = _productList.indexWhere((product) => product.productId == id);
     _cartList[index].quantity++;
     notifyListeners();
   }
-    quantityDecrement(int id) {
-    final index = _productList.indexWhere((product) => product.productId == id);
+    quantityDecrement(int index) {
+    //final index = _productList.indexWhere((product) => product.productId == id);
     _cartList[index].quantity--;
     notifyListeners();
   }
