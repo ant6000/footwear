@@ -14,7 +14,7 @@ class CustomCard extends StatelessWidget {
 
   void _navigateProductDetailsPage(BuildContext context, ProductProvider provider, ProductModel model, bool favourite) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ProductDetails( provider: provider, model: model, isfavourite: favourite,index: index,)));
+        MaterialPageRoute(builder: (context) => ProductDetails( provider: provider, model: model, /*isfavourite: favourite,index: index,*/)));
   }
 
   @override

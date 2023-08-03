@@ -27,10 +27,13 @@ class ProductProvider extends ChangeNotifier {
     if (index != -1) {
       _productList[index].isFavorite = !_productList[index].isFavorite;
       //addToFavlist(index);
+      if (_productList[index].isFavorite)
+        addToFavlist(index);
+      else
+        removeFromFavlist(index);
+
       notifyListeners();
     }
-    if (_productList[index].isFavorite) addToFavlist(index);
-    if (!_productList[index].isFavorite) removeFromFavlist(index);
   }
 
   void addToFavlist(int index) {
@@ -57,25 +60,25 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  quantityIncrement(int index) {
-    //final index = _productList.indexWhere((product) => product.productId == id);
+  void quantityIncrement(int index) {
     _cartList[index].quantity++;
     notifyListeners();
   }
-    quantityDecrement(int index) {
-    //final index = _productList.indexWhere((product) => product.productId == id);
+
+  quantityDecrement(int index) {
     _cartList[index].quantity--;
     notifyListeners();
   }
-   calculateTotalPrice() {
-    double totalPrice = 0.0;
-    for (var product in cartlist) {
-      totalPrice += product.price;
-    }
-    notifyListeners();
-    return totalPrice;
+
+  double getTotalPriceForCartItem(ProductModel product) {
+    return product.quantity * product.price;
   }
-  
+
+  double totalPrice() {
+    double totalprice = 0.0;
+    for (var element in cartlist) {
+      totalprice += element.quantity * element.price;
+    }
+    return totalprice;
+  }
 }

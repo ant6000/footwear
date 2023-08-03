@@ -108,7 +108,7 @@ class SingleCart extends StatelessWidget {
                       productModel.title.toString(),
                       style: TextStyle(fontSize: 20),
                     ),
-                    Text(productModel.price.toString(),
+                    Text(provider.getTotalPriceForCartItem(productModel).toString(),
                         style: TextStyle(fontSize: 20)),
                   ],
                 ),

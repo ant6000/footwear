@@ -40,7 +40,7 @@ class Cart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "provider.totalPrice()",
+                    'Total: ${provider.totalPrice()}',
                     style: TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(

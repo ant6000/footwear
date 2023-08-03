@@ -8,14 +8,15 @@ import 'package:provider/provider.dart';
 class ProductDetails extends StatelessWidget {
   final ProductProvider provider;
   final ProductModel model;
-  final bool isfavourite;
-  final int index;
-  ProductDetails(
-      {super.key,
-      required this.provider,
-      required this.model,
-      required this.isfavourite,
-      required this.index});
+  //final bool isfavourite;
+  //final int index;
+  ProductDetails({
+    super.key,
+    required this.provider,
+    required this.model,
+    //required this.isfavourite,
+    //required this.index
+  });
 
   final List<Color> colors = [
     Colors.red,
@@ -26,6 +27,7 @@ class ProductDetails extends StatelessWidget {
 
   void _addToFavourites(ProductProvider provider, int productId) {
     provider.addToFavourites(productId);
+    print(model.isFavorite);
   }
 
   @override
@@ -42,7 +44,7 @@ class ProductDetails extends StatelessWidget {
               _addToFavourites(provider, model.productId);
             },
             icon: Icon(
-              model.isFavorite ? Icons.favorite : Icons.favorite_border,
+              model.isFavorite ? Icons.favorite : Icons.favorite_outline,
               color: model.isFavorite ? Colors.pink : Colors.black,
             ),
           )
@@ -115,17 +117,17 @@ class ProductDetails extends StatelessWidget {
                       fontSize: 30,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      provider.addToCart(index);
-                    },
-                    child: const Row(
-                      children: [
-                        Icon(Icons.shopping_cart),
-                        Text('Add to Cart')
-                      ],
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     provider.addToCart(index);
+                  //   },
+                  //   child: const Row(
+                  //     children: [
+                  //       Icon(Icons.shopping_cart),
+                  //       Text('Add to Cart')
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               )
             ],
