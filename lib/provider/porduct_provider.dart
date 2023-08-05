@@ -27,10 +27,11 @@ class ProductProvider extends ChangeNotifier {
     if (index != -1) {
       _productList[index].isFavorite = !_productList[index].isFavorite;
       //addToFavlist(index);
-      if (_productList[index].isFavorite)
+      if (_productList[index].isFavorite) {
         addToFavlist(index);
-      else
+      } else {
         removeFromFavlist(index);
+      }
 
       notifyListeners();
     }

@@ -16,7 +16,7 @@ class Cart extends StatelessWidget {
             centerTitle: true,
           ),
           body: ListView.builder(
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               itemCount: provider.cartlist.length,
               itemBuilder: (context, index) {
                 return SingleCart(index: index);
@@ -41,7 +41,7 @@ class Cart extends StatelessWidget {
                 children: [
                   Text(
                     'Total: ${provider.totalPrice()}',
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(
                     onPressed: () {},

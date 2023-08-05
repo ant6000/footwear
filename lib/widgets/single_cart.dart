@@ -106,10 +106,10 @@ class SingleCart extends StatelessWidget {
                   children: [
                     Text(
                       productModel.title.toString(),
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     Text(provider.getTotalPriceForCartItem(productModel).toString(),
-                        style: TextStyle(fontSize: 20)),
+                        style: const TextStyle(fontSize: 20)),
                   ],
                 ),
                 Column(
@@ -122,7 +122,7 @@ class SingleCart extends StatelessWidget {
                         icon: const Icon(Icons.add)),
                     Text(
                       productModel.quantity.toString(),
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     IconButton(
                         onPressed: () {

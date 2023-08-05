@@ -6,15 +6,14 @@ class ImageSlider extends StatefulWidget {
   const ImageSlider({required this.model, super.key});
 
   @override
-  _ImageSliderState createState() => _ImageSliderState();
+  ImageSliderState createState() => ImageSliderState();
 }
 
-class _ImageSliderState extends State<ImageSlider> {
+class ImageSliderState extends State<ImageSlider> {
   final List<String> images = [
     'images/snikers1.png',
     'images/snikers4.png',
     'images/snikers3.png',
-    // Add more image paths here...
   ];
 
   int _currentIndex = 0;

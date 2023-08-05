@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/provider/porduct_provider.dart';
-import 'package:footwear/screens/cart.dart';
 import 'package:footwear/widgets/favourite_items.dart';
 import 'package:provider/provider.dart';
 

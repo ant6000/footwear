@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/image_slider.dart';
-import 'package:footwear/widgets/product_size_selector.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatelessWidget {

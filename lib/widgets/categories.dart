@@ -24,7 +24,6 @@ class CategoriesWidgets extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          print('hello');
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

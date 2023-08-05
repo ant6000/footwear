@@ -60,7 +60,6 @@ class _HomeFeedState extends State<HomeFeed> {
                       size: 40,
                     ),
                     onTap: () {
-                      print('sortby');
                     },
                   ),
                 ],

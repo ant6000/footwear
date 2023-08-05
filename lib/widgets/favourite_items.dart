@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
-import 'package:footwear/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
 class FavItems extends StatelessWidget {
