@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/model/catagory_model.dart';
+import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,17 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
+
+  int selectedCategoryIndex = 0;
+  List<ProductModel> filteredProductList = getProductListM;
+
+  void _onCategorySelected(int index) {
+    setState(() {
+      selectedCategoryIndex = index;
+      filteredProductList = productListM.where((product) => product.catagory == categoriesList[selectedCategoryIndex].name).toList();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -23,82 +35,89 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 
   List<CatagoryModel> categoriesList = getCategoriesList;
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Categories",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
+    return Consumer<ProductProvider>(
+      builder: (BuildContext context, productPorvider, Widget? child) {
+        return ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Sort by',
+                    "Categories",
                     style: TextStyle(
+                      color: Colors.black,
                       fontSize: 20,
-                      shadows: [
-                        Shadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            offset: Offset(2, 2)),
-                      ],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.arrow_drop_down_sharp,
-                      size: 40,
-                    ),
-                    onTap: () {
-                    },
-                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        'Sort by',
+                        style: TextStyle(
+                          fontSize: 20,
+                          shadows: [
+                            Shadow(
+                                color: Colors.black12,
+                                blurRadius: 10,
+                                offset: Offset(2, 2)),
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        child: const Icon(
+                          Icons.arrow_drop_down_sharp,
+                          size: 40,
+                        ),
+                        onTap: () {},
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 50,
-          child: GridView.builder(
-              padding: const EdgeInsets.only(bottom: 10, left: 10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: .25,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
               ),
-              //shrinkWrap: true,
-              itemCount: categoriesList.length,
-              scrollDirection: Axis.horizontal,
+            ),
+            SizedBox(
+              height: 50,
+              child: GridView.builder(
+                padding: const EdgeInsets.only(bottom: 10, left: 10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  childAspectRatio: .25,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: categoriesList.length,
+                scrollDirection: Axis.horizontal,
+                physics: const ScrollPhysics(),
+                itemBuilder: (context, index) => CategoriesWidgets(
+                  catagoryModel: categoriesList[index],
+                  oncategorySelected: _onCategorySelected,
+                ),
+              ),
+            ),
+            GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: .6,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              shrinkWrap: true,
+              itemCount: filteredProductList.length,
+              scrollDirection: Axis.vertical,
               physics: const ScrollPhysics(),
+              //itemBuilder: (context, index) => CustomCard(index: index),
               itemBuilder: (context, index) =>
-                  CategoriesWidgets(catagoryModel: categoriesList[index])),
-        ),
-        Consumer<ProductProvider>(builder: (context, productPorvider, child) {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: .6,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-            shrinkWrap: true,
-            itemCount: productPorvider.productListP.length,
-            scrollDirection: Axis.vertical,
-            physics: const ScrollPhysics(),
-            itemBuilder: (context, index) => CustomCard(index: index),
-          );
-        })
-      ],
+                 CustomCard(product: filteredProductList[index]),
+              
+            )
+          ],
+        );
+      },
     );
   }
 }

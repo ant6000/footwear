@@ -3,7 +3,11 @@ import 'package:footwear/model/catagory_model.dart';
 
 class CategoriesWidgets extends StatelessWidget {
   final CatagoryModel catagoryModel;
-  const CategoriesWidgets({required this.catagoryModel, super.key});
+  final Function(int) oncategorySelected;
+  const CategoriesWidgets(
+      {required this.catagoryModel,
+      required this.oncategorySelected,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,9 @@ class CategoriesWidgets extends StatelessWidget {
               offset: Offset(3, 5))
         ],
       ),
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
+          oncategorySelected(catagoryModel.index);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,7 +41,7 @@ class CategoriesWidgets extends StatelessWidget {
               height: 40,
               width: 40,
             ),
-             Text(
+            Text(
               catagoryModel.name,
               style: const TextStyle(fontSize: 20),
             ),

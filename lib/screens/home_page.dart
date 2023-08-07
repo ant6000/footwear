@@ -3,6 +3,7 @@ import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/cart.dart';
+import 'package:footwear/widgets/custom_card.dart';
 import 'package:footwear/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const Cart(),
+          builder: (context) =>  const Cart(),
         ));
   }
 

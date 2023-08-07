@@ -9,6 +9,12 @@ class ProductProvider extends ChangeNotifier {
   final List<ProductModel> _cartList = [];
   List<ProductModel> get cartlist => _cartList;
 
+
+  List<ProductModel> _productListBata = [];
+  List<ProductModel> get baTaproductList => _productListBata;
+
+
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   bool _isCartOpen = true;

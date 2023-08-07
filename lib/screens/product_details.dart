@@ -7,13 +7,11 @@ import 'package:provider/provider.dart';
 class ProductDetails extends StatelessWidget {
   final ProductProvider provider;
   final ProductModel model;
-  //final bool isfavourite;
   final int index;
   ProductDetails(
       {super.key,
       required this.provider,
       required this.model,
-      //required this.isfavourite,
       required this.index});
 
   final List<Color> colors = [
