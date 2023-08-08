@@ -4,7 +4,7 @@ import 'package:footwear/model/catagory_model.dart';
 class CategoriesWidgets extends StatelessWidget {
   final CatagoryModel catagoryModel;
   final Function(int) oncategorySelected;
-  const CategoriesWidgets(
+  const CategoriesWidgets( 
       {required this.catagoryModel,
       required this.oncategorySelected,
       super.key});
