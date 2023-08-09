@@ -13,6 +13,7 @@ class ProductProvider extends ChangeNotifier {
   List<ProductModel> get cartlist => _cartList;
 
   List<ProductModel> filteredProductList = getProductListM;
+  List<ProductModel> AllProductList = getProductListM;
   List<CatagoryModel> categoriesList = getCategoriesList;
 
   bool _isLoading = false;
@@ -91,16 +92,21 @@ class ProductProvider extends ChangeNotifier {
 
   void onCategorySelected(int index) {
     int selectedCategoryIndex = index;
-    filteredProductList = productListM
-        .where((product) =>
-            product.catagory == categoriesList[selectedCategoryIndex].name)
-        .toList();
+    if (index == 0) {
+      filteredProductList = productListM;
+    } else {
+      filteredProductList = productListM
+          .where((product) =>
+              product.catagory == categoriesList[selectedCategoryIndex].name)
+          .toList();
+    }
     notifyListeners();
   }
 
   void categoriesSelect(int index) {
-    for (int i = 0; i < categoriesList.length; i++) 
+    for (int i = 0; i < categoriesList.length; i++) {
       categoriesList[i].isSelected = (i == index);
-    notifyListeners();
+      notifyListeners();
+    }
   }
 }

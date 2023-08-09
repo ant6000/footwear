@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:footwear/model/catagory_model.dart';
-import 'package:footwear/model/products_model.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +21,7 @@ class _HomeFeedState extends State<HomeFeed> {
     });
   }
 
+  String dropdownValue = 'default';
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
@@ -48,14 +47,34 @@ class _HomeFeedState extends State<HomeFeed> {
                         'Sort by',
                         style: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       DropdownButton<String>(
-                        onChanged: (value) {},
+                        style: const TextStyle(fontSize: 20, color: Colors.black),
+                        icon: const Icon(Icons.sort),
+                        value: dropdownValue,
+                        onChanged: (String? value) {
+                          setState(() {
+                            dropdownValue = value!;
+                          });
+                        },
                         items: const [
-                          DropdownMenuItem(value: 'one', child: Text('Default')),
-                          DropdownMenuItem(value: 'one', child: Text('Price: High to low')),
-                          DropdownMenuItem(value: 'one', child: Text('Price: Low to High')),
+                          DropdownMenuItem<String>(
+                              value: 'default', child: Text('Default')),
+                          DropdownMenuItem<String>(
+                              value: 'high',
+                              child: Text(
+                                'Price:High-low',
+                              )),
+                          DropdownMenuItem<String>(
+                              value: 'low',
+                              child: Text(
+                                'Price:Low-High',
+                              )),
                         ],
                       ),
                     ],
