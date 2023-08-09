@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/model/catagory_model.dart';
 import 'package:footwear/model/products_model.dart';
 
 class ProductProvider extends ChangeNotifier {
   List<ProductModel> _productList = [];
   List<ProductModel> get productListP => _productList;
+
   final List<ProductModel> _favouriteProductList = [];
   List<ProductModel> get favouriteProductList => _favouriteProductList;
+
   final List<ProductModel> _cartList = [];
   List<ProductModel> get cartlist => _cartList;
 
-
-  List<ProductModel> _productListBata = [];
-  List<ProductModel> get baTaproductList => _productListBata;
-
-
+  List<ProductModel> filteredProductList = getProductListM;
+  List<CatagoryModel> categoriesList = getCategoriesList;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
   bool _isCartOpen = true;
   bool get isCartOpen => _isCartOpen;
 
@@ -38,7 +39,6 @@ class ProductProvider extends ChangeNotifier {
       } else {
         removeFromFavlist(index);
       }
-
       notifyListeners();
     }
   }
@@ -58,12 +58,12 @@ class ProductProvider extends ChangeNotifier {
   }
 
   void addToCart(int index) {
-    _cartList.add(productListP[index]);
+    _cartList.add(filteredProductList[index]);
     notifyListeners();
   }
 
   void removeFromCart(int index) {
-    _cartList.remove(productListP[index]);
+    _cartList.remove(filteredProductList[index]);
     notifyListeners();
   }
 
@@ -87,5 +87,20 @@ class ProductProvider extends ChangeNotifier {
       totalprice += element.quantity * element.price;
     }
     return totalprice;
+  }
+
+  void onCategorySelected(int index) {
+    int selectedCategoryIndex = index;
+    filteredProductList = productListM
+        .where((product) =>
+            product.catagory == categoriesList[selectedCategoryIndex].name)
+        .toList();
+    notifyListeners();
+  }
+
+  void categoriesSelect(int index) {
+    for (int i = 0; i < categoriesList.length; i++) 
+      categoriesList[i].isSelected = (i == index);
+    notifyListeners();
   }
 }

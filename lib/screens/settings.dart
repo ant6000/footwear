@@ -5,10 +5,21 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: Text(
-      'Settings',
-      style: TextStyle(fontSize: 40),
-    ));
+    return Center(
+      child: DropdownButton<String>(
+        onChanged: (value) {},
+        items: [
+          DropdownMenuItem(
+            value: 'one',
+            child: Text('hello')),
+          DropdownMenuItem(
+            value: 'one',
+            child: Text('hello')),
+          DropdownMenuItem(
+            value: 'one',
+            child: Text('hello')),
+        ],
+      ),
+    );
   }
 }

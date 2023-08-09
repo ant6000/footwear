@@ -14,17 +14,6 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
-
-  int selectedCategoryIndex = 0;
-  List<ProductModel> filteredProductList = getProductListM;
-
-  void _onCategorySelected(int index) {
-    setState(() {
-      selectedCategoryIndex = index;
-      filteredProductList = productListM.where((product) => product.catagory == categoriesList[selectedCategoryIndex].name).toList();
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -34,13 +23,11 @@ class _HomeFeedState extends State<HomeFeed> {
     });
   }
 
-  List<CatagoryModel> categoriesList = getCategoriesList;
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
       builder: (BuildContext context, productPorvider, Widget? child) {
-        return ListView(
+        return Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -61,28 +48,27 @@ class _HomeFeedState extends State<HomeFeed> {
                         'Sort by',
                         style: TextStyle(
                           fontSize: 20,
-                          shadows: [
-                            Shadow(
-                                color: Colors.black12,
-                                blurRadius: 10,
-                                offset: Offset(2, 2)),
-                          ],
                         ),
                       ),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.arrow_drop_down_sharp,
-                          size: 40,
-                        ),
-                        onTap: () {},
+                      DropdownButton<String>(
+                        onChanged: (value) {},
+                        items: const [
+                          DropdownMenuItem(value: 'one', child: Text('Default')),
+                          DropdownMenuItem(value: 'one', child: Text('Price: High to low')),
+                          DropdownMenuItem(value: 'one', child: Text('Price: Low to High')),
+                        ],
                       ),
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(
+            Container(
               height: 50,
+              margin: const EdgeInsets.only(bottom: 4),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
               child: GridView.builder(
                 padding: const EdgeInsets.only(bottom: 10, left: 10),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -91,29 +77,31 @@ class _HomeFeedState extends State<HomeFeed> {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
-                itemCount: categoriesList.length,
+                itemCount: productPorvider.categoriesList.length,
                 scrollDirection: Axis.horizontal,
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) => CategoriesWidgets(
-                  catagoryModel: categoriesList[index],
-                  oncategorySelected: _onCategorySelected,
+                  catagoryModel: productPorvider.categoriesList[index],
+                  oncategorySelected: productPorvider.onCategorySelected,
+                  index: index,
                 ),
               ),
             ),
-            GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              shrinkWrap: true,
-              itemCount: filteredProductList.length,
-              scrollDirection: Axis.vertical,
-              physics: const ScrollPhysics(),
-              //itemBuilder: (context, index) => CustomCard(index: index),
-              itemBuilder: (context, index) =>
-                 CustomCard(product: filteredProductList[index]),
-              
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: .6,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                shrinkWrap: true,
+                itemCount: productPorvider.filteredProductList.length,
+                scrollDirection: Axis.vertical,
+                physics: const ScrollPhysics(),
+                itemBuilder: (context, index) => CustomCard(
+                    product: productPorvider.filteredProductList[index],
+                    index: index),
+              ),
             )
           ],
         );
