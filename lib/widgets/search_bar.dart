@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/provider/porduct_provider.dart';
+import 'package:provider/provider.dart';
 
-class ItemSearchBar extends StatefulWidget {
-  const ItemSearchBar({super.key});
+class ItemSearchBar extends StatelessWidget {
+  final ProductProvider provider;
+  ItemSearchBar({super.key, required this.provider});
 
-  @override
-  State<ItemSearchBar> createState() => _ItemSearchBarState();
-}
+  final TextEditingController searchController = TextEditingController();
 
-class _ItemSearchBarState extends State<ItemSearchBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      width: 250,
+      width: 200,
       child: TextField(
+        controller: searchController,
+        onSubmitted: (value) {
+          provider.search(value);
+        },
         decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.search),
           hintText: 'Search here',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-          contentPadding: const EdgeInsets.only(top: 1,left: 10),
+          contentPadding: const EdgeInsets.only(top: 1, left: 10),
         ),
       ),
     );

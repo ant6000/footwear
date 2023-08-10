@@ -12,8 +12,10 @@ class ProductProvider extends ChangeNotifier {
   final List<ProductModel> _cartList = [];
   List<ProductModel> get cartlist => _cartList;
 
-  List<ProductModel> filteredProductList = getProductListM;
-  List<ProductModel> AllProductList = getProductListM;
+  List<ProductModel> _filteredProductList = getProductListM;
+  List<ProductModel> get filteredProductList => _filteredProductList;
+
+  List<ProductModel> defaultProductList = [];
   List<CatagoryModel> categoriesList = getCategoriesList;
 
   bool _isLoading = false;
@@ -21,6 +23,8 @@ class ProductProvider extends ChangeNotifier {
 
   bool _isCartOpen = true;
   bool get isCartOpen => _isCartOpen;
+
+  String dropDownValue = 'default';
 
   getAllProductsData() {
     _isLoading = true;
@@ -93,9 +97,9 @@ class ProductProvider extends ChangeNotifier {
   void onCategorySelected(int index) {
     int selectedCategoryIndex = index;
     if (index == 0) {
-      filteredProductList = productListM;
+      _filteredProductList = productListM;
     } else {
-      filteredProductList = productListM
+      _filteredProductList = productListM
           .where((product) =>
               product.catagory == categoriesList[selectedCategoryIndex].name)
           .toList();
@@ -108,5 +112,22 @@ class ProductProvider extends ChangeNotifier {
       categoriesList[i].isSelected = (i == index);
       notifyListeners();
     }
+  }
+
+  void sorting(String value) {
+    if (value == 'high') {
+      _filteredProductList.sort((a, b) => b.price.compareTo(a.price));
+    } else if (value == 'low') {
+      _filteredProductList.sort((a, b) => a.price.compareTo(b.price));
+    } else {}
+    notifyListeners();
+  }
+
+  void search(String value) {
+    _filteredProductList = productListP
+        .where((product) =>
+            product.title.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    notifyListeners();
   }
 }

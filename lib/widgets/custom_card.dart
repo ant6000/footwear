@@ -23,6 +23,8 @@ class CustomCard extends StatelessWidget {
               context, provider, product, product.isFavorite);
         },
         child: Container(
+          height: 300,
+          width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -130,14 +132,12 @@ class CustomCard extends StatelessWidget {
 // /////////////////////////////////////////////////////////////////////
 
 class KustomCards extends StatelessWidget {
-  final int index;
-  final ProductProvider provider;
-  final ProductModel product;
+  // final int index;
+  // final ProductProvider provider;
+  // final ProductModel product;
   const KustomCards(
       {super.key,
-      required this.index,
-      required this.provider,
-      required this.product});
+});
 
   @override
   Widget build(BuildContext context) {
@@ -149,12 +149,14 @@ class KustomCards extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: InkWell(
         onTap: () {
-          _navigateProductDetailsPage(
-              context, provider, product, product.isFavorite);
+         // _navigateProductDetailsPage(
+              //context, provider, product, product.isFavorite);
         },
         child: Container(
+          height: 400,
+          width: 300,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.green,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
@@ -189,15 +191,15 @@ class KustomCards extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          _addToFavourites(provider, product.productId);
+                        //  _addToFavourites(provider, product.productId);
                         },
                         child: Icon(
-                          product.isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color:
-                              product.isFavorite ? Colors.pink : Colors.black,
-                        )),
+                          Icons.favorite
+                             // : Icons.favorite_border,
+                         // color:
+                           //   product.isFavorite ? Colors.pink : Colors.black,
+                        )
+                        ),
                   ],
                 ),
               ),
@@ -213,7 +215,7 @@ class KustomCards extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    product.imageUrl,
+                    'images/snikers1.png',
                     width: 220,
                     height: 150,
                   )
@@ -221,7 +223,7 @@ class KustomCards extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                product.title,
+                'product.title',
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -230,7 +232,7 @@ class KustomCards extends StatelessWidget {
                 style: TextStyle(fontSize: 15),
               ),
               Text(
-                product.price.toString(),
+                'product.price.toString()',
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -245,15 +247,15 @@ class KustomCards extends StatelessWidget {
     provider.addToFavourites(productId);
   }
 
-  void _navigateProductDetailsPage(BuildContext context,
-      ProductProvider provider, ProductModel model, bool favourite) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ProductDetails(
-                  provider: provider,
-                  model: model,
-                  /*isfavourite: favourite,*/ index: index,
-                )));
-  }
+  // void _navigateProductDetailsPage(BuildContext context,
+  //     ProductProvider provider, ProductModel model, bool favourite) {
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => ProductDetails(
+  //                 provider: provider,
+  //                 model: model,
+  //                 /*isfavourite: favourite,*/ index: index,
+  //               )));
+  // }
 }

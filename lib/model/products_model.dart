@@ -115,7 +115,7 @@ final List<ProductModel> productListM = [
       imageUrl: 'images/snikers7.png'),
   ProductModel(
       productId: 128,
-      price: 7000.00,
+      price: 6000.00,
       title: 'Sandals',
       catagory: 'Sandals',
       imageUrl: 'images/snikers2.png'),

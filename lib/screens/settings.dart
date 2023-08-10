@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/widgets/custom_card.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({super.key});
+   Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: DropdownButton<String>(
-        onChanged: (value) {},
-        items: [
-          DropdownMenuItem(
-            value: 'one',
-            child: Text('hello')),
-          DropdownMenuItem(
-            value: 'one',
-            child: Text('hello')),
-          DropdownMenuItem(
-            value: 'one',
-            child: Text('hello')),
-        ],
-      ),
+    return const Center(
+      child: KustomCards(),
     );
   }
 }

@@ -3,10 +3,8 @@ import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/cart.dart';
-import 'package:footwear/widgets/custom_card.dart';
 import 'package:footwear/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
-
 import 'checkout.dart';
 import 'settings.dart';
 
@@ -22,65 +20,68 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.electric_bolt, color: Colors.amber),
-        actions: [
-          Row(
-            children: [
-              const Text(
-                'Nike',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: ItemSearchBar(),
-              ),
+    return Consumer<ProductProvider>(
+      builder: (BuildContext context, provider, Widget? child) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: const Icon(Icons.electric_bolt, color: Colors.amber),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Nike',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ItemSearchBar(provider: provider)),
+              ],
+            ),
+            actions: [
               Padding(
-                padding: const EdgeInsets.only(right: 15, left: 10),
-                child: Consumer<ProductProvider>(
-                  builder: (BuildContext context, provider, child) {
-                    return Badge(
-                      label:
-                           Text(provider.cartlist.length.toString()),
-                      backgroundColor: Colors.green,
-                      child: InkWell(
-                        onTap: () {
-                          if (provider.toggleCart()) {
-                            _closeCart();
-                          }
-                          if (provider.toggleCart()) {
-                            _showCart();
-                          }
-                        },
-                        child: const Icon(
-                          Icons.shopping_cart,
-                          color: Colors.purple,
-                        ),
-                      ),
-                    );
-                  },
+                padding: const EdgeInsets.only(
+                  right: 15,
+                ),
+                child: Badge(
+                  label: Text(provider.cartlist.length.toString()),
+                  backgroundColor: Colors.green,
+                  child: InkWell(
+                    onTap: () {
+                      if (provider.toggleCart()) {
+                        _closeCart();
+                      }
+                      if (provider.toggleCart()) {
+                        _showCart();
+                      }
+                    },
+                    child: const Icon(
+                      Icons.shopping_cart,
+                      color: Colors.purple,
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
-        ],
-      ),
-      body: _buildBody(currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        currentIndex: currentIndex,
-        onTap: (value) {
-          _onItemTapped(value);
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'List'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
-        ],
-      ),
+          body: _buildBody(currentIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            fixedColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
+            currentIndex: currentIndex,
+            onTap: (value) {
+              _onItemTapped(value);
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite), label: 'Saved'),
+              BottomNavigationBarItem(icon: Icon(Icons.history), label: 'List'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.settings), label: 'Settings')
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       case 2:
         return const CheckOut();
       case 3:
-        return const Settings();
+        return  Settings();
       default:
         return const SizedBox
             .shrink(); // This is just a fallback, you can replace it with any other widget.
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  const Cart(),
+          builder: (context) => const Cart(),
         ));
   }
 

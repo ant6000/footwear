@@ -21,7 +21,6 @@ class _HomeFeedState extends State<HomeFeed> {
     });
   }
 
-  String dropdownValue = 'default';
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
@@ -46,21 +45,19 @@ class _HomeFeedState extends State<HomeFeed> {
                       const Text(
                         'Sort by',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       DropdownButton<String>(
-                        style: const TextStyle(fontSize: 20, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                         icon: const Icon(Icons.sort),
-                        value: dropdownValue,
+                        value: productPorvider.dropDownValue,
                         onChanged: (String? value) {
-                          setState(() {
-                            dropdownValue = value!;
-                          });
+                          productPorvider.dropDownValue = value!;
+                          productPorvider.sorting(value);
                         },
                         items: const [
                           DropdownMenuItem<String>(
