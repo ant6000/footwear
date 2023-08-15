@@ -11,6 +11,12 @@ dependencies:
     sdk: flutter
 
   provider:
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage:
+  shared_preferences:
+  
   
 dev_dependencies:
   flutter_test:

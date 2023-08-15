@@ -13,7 +13,8 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: false);
-    // final ProductModel product = provider.productListP[index];
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth * 0.4; // Adjust the card width based on screen width
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -23,8 +24,7 @@ class CustomCard extends StatelessWidget {
               context, provider, product, product.isFavorite);
         },
         child: Container(
-          height: 300,
-          width: 200,
+          height: cardWidth,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),

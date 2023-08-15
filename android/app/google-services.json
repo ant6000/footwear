@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "455166254173",
+    "project_id": "test-flutter-a0656",
+    "storage_bucket": "test-flutter-a0656.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455166254173:android:b42cc19116621a566e41b4",
+        "android_client_info": {
+          "package_name": "com.example.footwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455166254173-ekgn7rn4hqicmojqpiej851pikohm8ki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChFm7h4xhIKLgC5Yblpafgd-UW2fxgDtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455166254173-ekgn7rn4hqicmojqpiej851pikohm8ki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
