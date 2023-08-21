@@ -1,19 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear/screens/home_page.dart';
+import 'package:footwear/screens/register_screen.dart';
 import 'package:provider/provider.dart';
+import 'provider/auth_provider.dart';
 import 'provider/porduct_provider.dart';
 import 'firebase_options.dart';
-  void main() async {
-await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-    runApp(MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (context) => ProductProvider(),
-      ),
-    ], child: const MainApp()));
-  }
+import 'screens/login_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => ProductProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+    ),
+  ], child: const MainApp()));
+}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -27,7 +34,10 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (_) => const HomePage(),
+        '/': (_) => LogIn(),
+        '/homepage':(context) =>const HomePage(),
+        '/register':(context) => Register(),
+        '/login':(context) => LogIn(),
       },
     );
   }

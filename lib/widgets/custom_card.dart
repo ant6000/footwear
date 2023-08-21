@@ -135,9 +135,7 @@ class KustomCards extends StatelessWidget {
   // final int index;
   // final ProductProvider provider;
   // final ProductModel product;
-  const KustomCards(
-      {super.key,
-});
+  const KustomCards({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +191,7 @@ class KustomCards extends StatelessWidget {
                         onTap: () {
                         //  _addToFavourites(provider, product.productId);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.favorite
                              // : Icons.favorite_border,
                          // color:
@@ -222,19 +220,19 @@ class KustomCards extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              Text(
+              const Text(
                 'product.title',
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const Text(
                 'Comfortable and felxible',
                 style: TextStyle(fontSize: 15),
               ),
-              Text(
+              const Text(
                 'product.price.toString()',
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -243,9 +241,9 @@ class KustomCards extends StatelessWidget {
     );
   }
 
-  void _addToFavourites(ProductProvider provider, int productId) {
-    provider.addToFavourites(productId);
-  }
+  // void _addToFavourites(ProductProvider provider, int productId) {
+  //   provider.addToFavourites(productId);
+  // }
 
   // void _navigateProductDetailsPage(BuildContext context,
   //     ProductProvider provider, ProductModel model, bool favourite) {

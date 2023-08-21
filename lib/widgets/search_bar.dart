@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/provider/porduct_provider.dart';
-import 'package:provider/provider.dart';
 
 class ItemSearchBar extends StatelessWidget {
   final ProductProvider provider;
