@@ -26,8 +26,15 @@ class FirebaseAuthRepo {
       addDetails(addmodel);
       return addmodel;
     } catch (e) {
-      print(e.toString());
       return null;
+    }
+  }
+
+  static Future signIn(String email, String password) async {
+    try {
+      _auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      print(e.toString());
     }
   }
 

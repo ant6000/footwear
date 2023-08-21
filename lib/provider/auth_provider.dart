@@ -17,4 +17,8 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future loginAccount(String email, String password) async {
+    FirebaseAuthRepo.signIn(email, password);
+    print('successfully logedin');
+  }
 }
