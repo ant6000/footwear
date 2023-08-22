@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class CatagoryModel {
   String name;
   String imageUrl;
@@ -5,11 +7,18 @@ class CatagoryModel {
   bool isSelected;
 
   CatagoryModel(
-  {required this.name, required this.imageUrl, required this.index,this.isSelected = false});
+      {required this.name,
+      required this.imageUrl,
+      required this.index,
+      this.isSelected = false});
 }
 
 final List<CatagoryModel> catagories = [
-  CatagoryModel(name: 'All Shoes', imageUrl: 'images/snikers1.png', index: 0, isSelected: true),
+  CatagoryModel(
+      name: 'All Shoes',
+      imageUrl: 'images/snikers1.png',
+      index: 0,
+      isSelected: true),
   CatagoryModel(name: 'Snikers', imageUrl: 'images/snikers1.png', index: 1),
   CatagoryModel(name: 'Sports', imageUrl: 'images/snikers3.png', index: 2),
   CatagoryModel(name: 'Loper', imageUrl: 'images/snikers4.png', index: 3),
@@ -24,4 +33,23 @@ final List<CatagoryModel> catagories = [
 
 List<CatagoryModel> get getCategoriesList {
   return catagories;
+}
+
+class Settings {
+  String name;
+  String iconurl;
+  Settings(this.name, this.iconurl);
+}
+
+final List<Settings> settingslist = [
+  Settings('Edit Profile', 'Icons.settings'),
+  Settings('Shoping address', 'Icons.settings'),
+  Settings('Wishlist', 'Icons.settings'),
+  Settings('Order history', 'Icons.settings'),
+  Settings('Notifications', 'Icons.settings'),
+  Settings('Cards', 'Icons.settings'),
+];
+
+List<Settings> getSettingsList(){
+  return settingslist;
 }

@@ -34,10 +34,10 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (_) => LogIn(),
-        '/homepage':(context) =>const HomePage(),
-        '/register':(context) => Register(),
-        '/login':(context) => LogIn(),
+        '/': (_) => HomePage(),
+        // '/homepage':(context) =>const HomePage(),
+        // '/register':(context) => Register(),
+        // '/login':(context) => LogIn(),
       },
     );
   }
