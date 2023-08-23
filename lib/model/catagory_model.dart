@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class CatagoryModel {
   String name;
@@ -35,21 +34,3 @@ List<CatagoryModel> get getCategoriesList {
   return catagories;
 }
 
-class Settings {
-  String name;
-  String iconurl;
-  Settings(this.name, this.iconurl);
-}
-
-final List<Settings> settingslist = [
-  Settings('Edit Profile', 'Icons.settings'),
-  Settings('Shoping address', 'Icons.settings'),
-  Settings('Wishlist', 'Icons.settings'),
-  Settings('Order history', 'Icons.settings'),
-  Settings('Notifications', 'Icons.settings'),
-  Settings('Cards', 'Icons.settings'),
-];
-
-List<Settings> getSettingsList(){
-  return settingslist;
-}

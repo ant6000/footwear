@@ -25,16 +25,13 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           appBar: AppBar(
             leading: const Icon(Icons.electric_bolt, color: Colors.amber),
-            title: Row(
+            title: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Nike',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: ItemSearchBar(provider: provider)),
               ],
             ),
             actions: [

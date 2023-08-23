@@ -29,15 +29,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'Lato',
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (_) => HomePage(),
-        // '/homepage':(context) =>const HomePage(),
-        // '/register':(context) => Register(),
-        // '/login':(context) => LogIn(),
+        '/': (_) => LogIn(),
+        '/homepage':(context) =>const HomePage(),
+        '/register':(context) => Register(),
+         '/login':(context) => LogIn(),
       },
     );
   }

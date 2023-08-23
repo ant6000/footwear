@@ -95,8 +95,10 @@ class LogIn extends StatelessWidget {
                     onPressed: () {
                       provider.loginAccount(
                           emailController.text, passwordController.text);
+                      Navigator.pushNamed(context, '/homepage');
                     },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                     child: const Text(
                       'Iog In',
                       style: TextStyle(fontSize: 30, color: Colors.white),

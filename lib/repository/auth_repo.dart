@@ -7,15 +7,15 @@ class FirebaseAuthRepo {
   static String collectionUser = 'User Data';
 
   static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static FirebaseAuth get authh => _auth;
   static User? get user => _auth.currentUser;
   static String userUid = '';
-
   static Future<UserModel?> signUp(
       String name, String email, String password) async {
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
+      //final message = SnackBar(content: Text('successfully loged in'));
       final addmodel = UserModel(
           uid: credential.user?.uid ?? '',
           name: name,
@@ -43,5 +43,14 @@ class FirebaseAuthRepo {
         .collection(collectionUser)
         .doc(userModel.uid)
         .set(userModel.toMap());
+  }
+
+  static Future<UserModel> getUserDetails(String email) async {
+    final snapsot = await _database
+        .collection(collectionUser)
+        .where('email', isEqualTo: email)
+        .get();
+    final userData = snapsot.docs.map((e) => UserModel.fromSnapsot(e)).single;
+    return userData;
   }
 }

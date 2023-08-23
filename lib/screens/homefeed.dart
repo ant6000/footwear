@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/widgets/custom_card.dart';
+import 'package:footwear/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:footwear/widgets/categories.dart';
 
@@ -27,6 +28,10 @@ class _HomeFeedState extends State<HomeFeed> {
       builder: (BuildContext context, productPorvider, Widget? child) {
         return Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: ItemSearchBar(),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Row(

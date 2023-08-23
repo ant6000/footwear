@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+
 class UserModel {
   final String uid;
   final String name;
@@ -13,6 +16,16 @@ class UserModel {
     required this.profilePic,
   });
 
+  tojson() {
+    return {
+      'uid': uid,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'profilePic': profilePic
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
@@ -24,9 +37,19 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) => UserModel(
+      uid: map["uid"] ?? "",
       name: map["name"] ?? "",
       email: map["email"] ?? "",
-      uid: map["uid"] ?? "",
       phone: map["phone"] ?? "",
       profilePic: map["profilePic"] ?? "");
+
+  factory UserModel.fromSnapsot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    return UserModel(
+        uid: document['uid'],
+        name: document['name'],
+        email: document['email'],
+        phone: document['phone'],
+        profilePic: document['profilePic']);
+  }
 }

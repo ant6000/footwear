@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:footwear/provider/porduct_provider.dart';
 
 class ItemSearchBar extends StatelessWidget {
-  final ProductProvider provider;
-  ItemSearchBar({super.key, required this.provider});
+  //final ProductProvider provider;
+  ItemSearchBar({super.key, /*required this.provider*/});
 
   final TextEditingController searchController = TextEditingController();
 
@@ -11,11 +11,11 @@ class ItemSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      width: 200,
+      width: double.infinity,
       child: TextField(
         controller: searchController,
         onSubmitted: (value) {
-          provider.search(value);
+          //provider.search(value);
         },
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search),

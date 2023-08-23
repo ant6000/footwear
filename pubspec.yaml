@@ -29,3 +29,8 @@ flutter:
 
   assets:
     - images/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: fonts/Lato-Regular.ttf

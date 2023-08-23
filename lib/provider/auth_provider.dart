@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear/model/user_model.dart';
 import 'package:footwear/repository/auth_repo.dart';
@@ -5,6 +6,7 @@ import 'package:footwear/repository/auth_repo.dart';
 class AuthProvider extends ChangeNotifier {
   UserModel? _authModel;
   UserModel? get authModel => _authModel;
+  final _auth = FirebaseAuthRepo();
 
   Future<void> registerAccount(
       String name, String email, String password) async {
@@ -20,5 +22,13 @@ class AuthProvider extends ChangeNotifier {
   Future loginAccount(String email, String password) async {
     FirebaseAuthRepo.signIn(email, password);
     print('successfully logedin');
+  }
+
+  Future showProfileInfo() async {
+    final email = authModel?.email;
+    if (email != null)
+      return FirebaseAuthRepo.getUserDetails(email!);
+    else
+      print('error');
   }
 }
