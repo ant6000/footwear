@@ -7,6 +7,7 @@ import 'provider/auth_provider.dart';
 import 'provider/porduct_provider.dart';
 import 'firebase_options.dart';
 import 'screens/login_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,14 +32,14 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Lato',
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (_) => LogIn(),
-        '/homepage':(context) =>const HomePage(),
-        '/register':(context) => Register(),
+        '/': (context) => const SplashScreen(),
          '/login':(context) => LogIn(),
+        '/register':(context) => Register(),
+        '/homepage':(context) =>const HomePage(),
       },
     );
   }

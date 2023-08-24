@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:footwear/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +8,8 @@ class Register extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +90,24 @@ class Register extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      provider.registerAccount(nameController.text, emailController.text,passwordController.text);
+                    onPressed: () async {
+                      bool result = await provider.registerAccount(
+                          nameController.text,
+                          emailController.text,
+                          passwordController.text);
+                        
+                      if (result) {
+                        Navigator.pushReplacementNamed(context, '/homepage');
+                      } else {
+                        Fluttertoast.showToast(msg: 'Registration Failed',
+                        backgroundColor: Colors.amber,
+                        textColor: Colors.white,
+                        gravity: ToastGravity.BOTTOM,
+                        toastLength: Toast.LENGTH_SHORT);
+                      }
                     },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(fontSize: 30, color: Colors.white),

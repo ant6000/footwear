@@ -14,20 +14,16 @@ class Settings extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-              width: 100,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.network(authprovider.authModel?.profilePic ?? ''),
-              ),
-            ),
+            // CircleAvatar(
+            //   radius: 50,
+            //   backgroundImage: NetworkImage(authprovider.authModel?.profilePic??''),
+            // ),
             const SizedBox(height: 10),
             Text(
               authprovider.authModel?.name ?? '',
               style: TextStyle(fontSize: 30),
             ),
-            Text(authprovider.authModel?.name ?? '',
+            Text(authprovider.authModel?.email ?? '',
                 style: TextStyle(fontSize: 20)),
             const SizedBox(height: 10),
             SizedBox(

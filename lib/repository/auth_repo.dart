@@ -10,12 +10,12 @@ class FirebaseAuthRepo {
   static FirebaseAuth get authh => _auth;
   static User? get user => _auth.currentUser;
   static String userUid = '';
+
   static Future<UserModel?> signUp(
       String name, String email, String password) async {
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      //final message = SnackBar(content: Text('successfully loged in'));
       final addmodel = UserModel(
           uid: credential.user?.uid ?? '',
           name: name,
@@ -26,15 +26,18 @@ class FirebaseAuthRepo {
       addDetails(addmodel);
       return addmodel;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }
 
-  static Future signIn(String email, String password) async {
+  static Future<bool> signIn(String email, String password) async {
     try {
-      _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return true;
     } catch (e) {
-      print(e.toString());
+      //print(e.toString());
+      return false;
     }
   }
 

@@ -17,6 +17,9 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   shared_preferences:
+  fluttertoast:
+  lottie:
+  flutter_native_splash:
   
   
 dev_dependencies:
@@ -29,6 +32,7 @@ flutter:
 
   assets:
     - images/
+    - animation/
 
   fonts:
     - family: Lato

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:footwear/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -59,8 +60,10 @@ class LogIn extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextField(
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      hintText: 'Enter email',
+                      labelText: 'Enter email',
+                      hintText: 'Enter your Email',
                       prefixIcon: const Icon(Icons.mail),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
@@ -69,8 +72,10 @@ class LogIn extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: TextField(
                     controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
-                        hintText: 'Enter Password',
+                        labelText: 'Enter Password',
+                        hintText: 'Enter your Password',
                         prefixIcon: const Icon(Icons.password),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
@@ -92,10 +97,24 @@ class LogIn extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      provider.loginAccount(
+                    onPressed: () async {
+                      bool result = await provider.loginAccount(
                           emailController.text, passwordController.text);
-                      Navigator.pushNamed(context, '/homepage');
+                      CircularProgressIndicator(backgroundColor: Colors.black,
+                      color: Colors.amber,
+                      );
+                      if (result) {
+                        Navigator.pushReplacementNamed(context, '/homepage');
+                      } else {
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(content: Text('login failed')));
+                        Fluttertoast.showToast(
+                            msg: 'login failed',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white);
+                      }
                     },
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.blue),
