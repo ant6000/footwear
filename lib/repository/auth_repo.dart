@@ -41,7 +41,11 @@ class FirebaseAuthRepo {
     }
   }
 
-  static Future addDetails(UserModel userModel) async {
+static Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
+  static Future<void> addDetails(UserModel userModel) async {
     _database
         .collection(collectionUser)
         .doc(userModel.uid)
@@ -49,11 +53,19 @@ class FirebaseAuthRepo {
   }
 
   static Future<UserModel> getUserDetails(String email) async {
-    final snapsot = await _database
-        .collection(collectionUser)
-        .where('email', isEqualTo: email)
-        .get();
-    final userData = snapsot.docs.map((e) => UserModel.fromSnapsot(e)).single;
-    return userData;
+    try {
+      final snapshot = await _database
+          .collection(collectionUser)
+          .where('email', isEqualTo: email)
+          .get();
+      if (snapshot.docs.isNotEmpty) {
+        // Assuming you have only one document per email
+        return UserModel.fromMap(snapshot.docs.first.data());
+      } else {
+        throw Exception('User data not found');
+      }
+    } catch (e) {
+      throw Exception('Error fetching user data: $e');
+    }
   }
 }

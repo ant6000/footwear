@@ -34,11 +34,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future showProfileInfo() async {
+Future<void> logOut() async {
+    FirebaseAuthRepo.signOut();
+    _authModel = null; // Clear the authenticated user data
+    notifyListeners();
+  }
+
+  Future<UserModel?> showProfileInfo() async {
     final email = authModel?.email;
-    if (email != null)
-      return FirebaseAuthRepo.getUserDetails(email!);
-    else
+    if (email != null) {
+      UserModel userDetails = await FirebaseAuthRepo.getUserDetails(email);
+      return userDetails;
+    } else {
       print('error');
+      return null;
+    }
   }
 }
