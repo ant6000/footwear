@@ -3,7 +3,6 @@ import 'package:footwear/provider/porduct_provider.dart';
 import 'package:footwear/screens/favourites.dart';
 import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/cart.dart';
-import 'package:footwear/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 import 'checkout.dart';
 import 'settings.dart';

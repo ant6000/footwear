@@ -27,6 +27,8 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> loginAccount(String email, String password) async {
     try {
       bool loginResult = await FirebaseAuthRepo.signIn(email, password);
+      var userData = showProfileInfo(email);
+      _authModel = await userData;
       notifyListeners();
       return loginResult;
     } catch (e) {
@@ -41,10 +43,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<UserModel?> showProfileInfo() async {
-    final email = authModel?.email;
-    print(email);
-    if (email != null) {
+  Future<UserModel?> showProfileInfo(String email) async {
+    // final email = authModel?.email;
+    // print(email);
+    // if (email != null) {
       try {
         UserModel userDetails = await FirebaseAuthRepo.getUserDetails(email);
         return userDetails;
@@ -52,9 +54,9 @@ class AuthProvider extends ChangeNotifier {
         print('Error fetching user details: $e');
         return null;
       }
-    } else {
-      print('No email available.');
-      return null;
-    }
+    // } else {
+    //   print('No email available.');
+    //   return null;
+    // }
   }
 }
