@@ -41,7 +41,7 @@ class FirebaseAuthRepo {
     }
   }
 
-static Future<void> signOut() async {
+  static Future<void> signOut() async {
     await _auth.signOut();
   }
 
@@ -58,6 +58,7 @@ static Future<void> signOut() async {
           .collection(collectionUser)
           .where('email', isEqualTo: email)
           .get();
+      print(snapshot);
       if (snapshot.docs.isNotEmpty) {
         // Assuming you have only one document per email
         return UserModel.fromMap(snapshot.docs.first.data());

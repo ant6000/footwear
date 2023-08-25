@@ -10,42 +10,55 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     final authprovider = Provider.of<AuthProvider>(context);
     return SingleChildScrollView(
-      child: FutureBuilder<UserModel?>(
-        future: authprovider.showProfileInfo(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasData) {
-            UserModel? user = snapshot.data;
-            return Column(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(user?.profilePic??''),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  user?.name ?? '',
-                  style: const TextStyle(fontSize: 30),
-                ),
-                Text(user?.email ?? '',
-                    style: const TextStyle(fontSize: 20)),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
-                        shape: const StadiumBorder()),
-                    child: const Text(
-                      'Edit Profile',
-                      style: TextStyle(fontSize: 25),
+      child: Column(
+        children: [
+          FutureBuilder<UserModel?>(
+            future: authprovider.showProfileInfo(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasData) {
+                UserModel? user = snapshot.data;
+                return Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage:NetworkImage(user?.profilePic??''),
+                      
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    Text(
+                      user?.name ?? '',
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                    Text(user?.email ?? '',
+                        style: const TextStyle(fontSize: 20)),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber,
+                            shape: const StadiumBorder()),
+                        child: const Text(
+                          'Edit Profile',
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return const Text('No user data available.');
+              }
+            },
+          ),
+                          const SizedBox(height: 10),
                 const Divider(),
                 const SizedBox(height: 10),
                 SettingsTile(
@@ -108,14 +121,7 @@ class Settings extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, '/login');
                   },
                 ),
-              ],
-            );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return const Text('No user data available.');
-          }
-        },
+        ],
       ),
     );
   }

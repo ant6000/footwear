@@ -27,6 +27,7 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> loginAccount(String email, String password) async {
     try {
       bool loginResult = await FirebaseAuthRepo.signIn(email, password);
+      notifyListeners();
       return loginResult;
     } catch (e) {
       //print('Login Failed: ${e.toString()}');
@@ -34,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-Future<void> logOut() async {
+  Future<void> logOut() async {
     FirebaseAuthRepo.signOut();
     _authModel = null; // Clear the authenticated user data
     notifyListeners();
@@ -42,11 +43,17 @@ Future<void> logOut() async {
 
   Future<UserModel?> showProfileInfo() async {
     final email = authModel?.email;
+    print(email);
     if (email != null) {
-      UserModel userDetails = await FirebaseAuthRepo.getUserDetails(email);
-      return userDetails;
+      try {
+        UserModel userDetails = await FirebaseAuthRepo.getUserDetails(email);
+        return userDetails;
+      } catch (e) {
+        print('Error fetching user details: $e');
+        return null;
+      }
     } else {
-      print('error');
+      print('No email available.');
       return null;
     }
   }
