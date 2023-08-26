@@ -36,7 +36,7 @@ class FirebaseAuthRepo {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
     } catch (e) {
-      //print(e.toString());
+      print(e.toString());
       return false;
     }
   }
@@ -58,7 +58,6 @@ class FirebaseAuthRepo {
           .collection(collectionUser)
           .where('email', isEqualTo: email)
           .get();
-      print(snapshot);
       if (snapshot.docs.isNotEmpty) {
         // Assuming you have only one document per email
         return UserModel.fromMap(snapshot.docs.first.data());

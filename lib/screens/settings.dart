@@ -13,7 +13,9 @@ class Settings extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(provider.authModel!.profilePic),
+              backgroundImage: provider.authModel!.profilePic == ''
+                  ? const AssetImage('images/snikers1.png') as ImageProvider
+                  : NetworkImage(provider.authModel!.profilePic),
             ),
             const SizedBox(height: 10),
             Text(

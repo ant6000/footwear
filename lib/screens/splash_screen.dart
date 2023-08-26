@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/screens/home_page.dart';
+import 'package:footwear/utility/shared_pref.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,15 +11,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    navigateToMainScreen();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   checkUserStatus();
+  // }
+
+  void checkUserStatus() async {
+    var pref = SharedPref();
+    var value = await pref.readUserData();
+    print('pref: $value');
+    value != '' ? const HomePage() : navigateToLoginScreen();
   }
 
-  Future<void> navigateToMainScreen() async {
+  navigateRoute() => Navigator.pushReplacementNamed(context, '/login');
+
+  Future<void> navigateToLoginScreen() async {
     await Future.delayed(const Duration(seconds: 3)); // Wait for 2 seconds
-    Navigator.pushReplacementNamed(context, '/login');
+    checkUserStatus();
+    navigateRoute();
   }
 
   @override
