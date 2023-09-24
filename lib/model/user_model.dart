@@ -4,6 +4,7 @@ class UserModel {
   final String uid;
   final String name;
   final String email;
+  final String password;
   final String phone;
   final String profilePic;
 
@@ -11,6 +12,7 @@ class UserModel {
     required this.uid,
     required this.name,
     required this.email,
+    required this.password,
     required this.phone,
     required this.profilePic,
   });
@@ -20,6 +22,7 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
+      'password': password,
       'phone': phone,
       'profilePic': profilePic
     };
@@ -30,6 +33,7 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
+      'password': password,
       'phone': phone,
       'profilePic': profilePic,
     };
@@ -39,6 +43,7 @@ class UserModel {
       uid: map["uid"] ?? "",
       name: map["name"] ?? "",
       email: map["email"] ?? "",
+      password: map["password"] ?? "",
       phone: map["phone"] ?? "",
       profilePic: map["profilePic"] ?? "");
 
@@ -48,6 +53,7 @@ class UserModel {
         uid: document['uid'],
         name: document['name'],
         email: document['email'],
+        password: document['password'],
         phone: document['phone'],
         profilePic: document['profilePic']);
   }

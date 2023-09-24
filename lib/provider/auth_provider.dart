@@ -38,10 +38,10 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> loginAccount(String email, String password) async {
     try {
       bool loginResult = await FirebaseAuthRepo.signIn(email, password);
-      var userData = showProfileInfo(email);
+      //var userData = showProfileInfo(email);
       SharedPref().writeUserData(email);
-      _authModel = await userData;
-      notifyListeners();
+      //_authModel = await userData;
+      //notifyListeners();
       return loginResult;
     } catch (e) {
       //print('Login Failed: ${e.toString()}');
@@ -63,6 +63,16 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       print('Error fetching user details: $e');
       return null;
+    }
+  }
+
+  Future<void> checkedLoginorNot() async {
+    final pref = SharedPref();
+    final String email = await pref.readUserData();
+    if (email != '') {
+      var userData = showProfileInfo(email);
+      _authModel = await userData;
+      notifyListeners();
     }
   }
 }

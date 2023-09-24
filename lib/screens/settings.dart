@@ -8,7 +8,8 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Consumer<AuthProvider>(builder: (context, provider, child) {
+      child: Consumer<AuthProvider>(builder: (context, provider, _) {
+        //provider.checkedLoginorNot;
         return Column(
           children: [
             CircleAvatar(

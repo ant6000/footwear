@@ -7,8 +7,8 @@ class FirebaseAuthRepo {
   static String collectionUser = 'User Data';
 
   static final FirebaseAuth _auth = FirebaseAuth.instance;
-  static FirebaseAuth get authh => _auth;
-  static User? get user => _auth.currentUser;
+  static FirebaseAuth get auth => _auth;
+  static User? get user => auth.currentUser;
   static String userUid = '';
 
   static Future<UserModel?> signUp(
@@ -20,14 +20,16 @@ class FirebaseAuthRepo {
           uid: credential.user?.uid ?? '',
           name: name,
           email: email,
+          password: password,
           phone: credential.user?.phoneNumber ?? '',
           profilePic: credential.user?.photoURL ?? '');
 
       addDetails(addmodel);
       return addmodel;
     } catch (e) {
-      print(e.toString());
-      return null;
+      //print(e.toString());
+      throw Exception(e.toString());
+      //return null;
     }
   }
 
@@ -36,8 +38,9 @@ class FirebaseAuthRepo {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
     } catch (e) {
-      print(e.toString());
-      return false;
+      //print(e.toString());
+      throw Exception(e.toString());
+      //return false;
     }
   }
 

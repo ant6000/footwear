@@ -3,6 +3,7 @@ class ProductModel {
   int quantity;
   double price;
   String title;
+  String? details;
   String catagory;
   String imageUrl;
   bool isFavorite;
@@ -12,9 +13,10 @@ class ProductModel {
       required this.price,
       required this.catagory,
       required this.title,
+      this.details,
       required this.imageUrl,
       this.isFavorite = false});
-}
+  }
 
 final List<ProductModel> productListM = [
   ProductModel(
