@@ -54,7 +54,7 @@ class _UploadPageState extends State<UploadPage> {
                   height: 200,
                   width: 300,
                   decoration: BoxDecoration(
-                    image: selectedImage == null ? DecorationImage(image: AssetImage('images/antor.png')): DecorationImage(image: FileImage(selectedImage!)),
+                    image: selectedImage == null ? const DecorationImage(image: AssetImage('images/antor.png')): DecorationImage(image: FileImage(selectedImage!)),
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.black26),
                   child: IconButton(
