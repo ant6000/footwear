@@ -1,18 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:footwear/provider/show_product_details_provider.dart';
-import 'package:footwear/provider/upload_provider.dart';
-import 'package:footwear/screens/home_page.dart';
-import 'package:footwear/screens/homefeed.dart';
-import 'package:footwear/screens/register_screen.dart';
 import 'package:provider/provider.dart';
-import 'provider/auth_provider.dart';
-import 'provider/porduct_provider.dart';
 import 'firebase_options.dart';
-import 'screens/admin_page.dart';
-import 'screens/login_screen.dart';
-import 'screens/show_product_details.dart';
-import 'screens/splash_screen.dart';
+import 'v1/provider/auth_provider.dart';
+import 'v1/provider/porduct_provider.dart';
+import 'v1/screens/login_screen.dart';
+import 'v1/screens/register_screen.dart';
+import 'v2/provider/show_details_provider.dart';
+import 'v2/provider/upload_provider.dart';
+import 'v2/screens/home_feed.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,10 +44,10 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const UploadPage(),
+        '/': (context) => const HomeFeed(),
         '/login':(context) => const LogIn(),
         '/register':(context) => const Register(),
-        '/homepage':(context) =>const HomePage(),
+        //'/homepage':(context) =>const HomePage(),
       },
     );
   }
