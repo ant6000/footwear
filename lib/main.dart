@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:footwear/provider/show_product_details_provider.dart';
 import 'package:footwear/provider/upload_provider.dart';
 import 'package:footwear/screens/home_page.dart';
+import 'package:footwear/screens/homefeed.dart';
 import 'package:footwear/screens/register_screen.dart';
 import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
@@ -9,6 +11,7 @@ import 'provider/porduct_provider.dart';
 import 'firebase_options.dart';
 import 'screens/admin_page.dart';
 import 'screens/login_screen.dart';
+import 'screens/show_product_details.dart';
 import 'screens/splash_screen.dart';
 
 void main() async {
@@ -24,6 +27,9 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => UploadProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ShowProductDetailsProvider(),
     ),
   ], child: const MainApp()));
 }

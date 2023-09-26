@@ -24,7 +24,7 @@ class FirebaseUploadRepository {
           .onError(
               (error, stackTrace) => print("Error writing document: $error"));
     } catch (e) {
-      print(e.toString());
+      print('error form repo ${e.toString()}');
     }
   }
 }
