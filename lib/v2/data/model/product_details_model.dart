@@ -7,7 +7,8 @@ class ProductDetailsModel{
   String? details;
   double price;
   bool isFav;
-  ProductDetailsModel({ required this.imageUrl, required this.title, this.details, required this.price, this.isFav = false, });
+  bool isAdded;
+  ProductDetailsModel({ required this.imageUrl, required this.title, this.details, required this.price, this.isFav = false,this.isAdded = false });
   
   toJson(){
     return{

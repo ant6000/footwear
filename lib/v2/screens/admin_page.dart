@@ -62,7 +62,7 @@ class _UploadPageState extends State<UploadPage> {
                       onPressed: () {
                         _pickImageFromGalary();
                       },
-                      icon:Icon(Icons.add_box)),
+                      icon:const Icon(Icons.add_box)),
                 ),
               ),              
               const SizedBox(height: 10),

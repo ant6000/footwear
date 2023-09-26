@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:footwear/repository/upload_repo.dart';
+import 'package:footwear/v2/data/repository/upload_repo.dart';
 
 class UploadProvider extends ChangeNotifier {
   Future<bool> uploadData(String imageUrl, String productId, String title,

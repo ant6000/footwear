@@ -13,7 +13,6 @@ class HomeFeed extends StatefulWidget {
 class _TestState extends State<HomeFeed> {
   // @override
   // void initState() {
-  //   // TODO: implement initState
   //   super.initState();
   //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
   //     final provider = Provider.of<ShowProductDetailsProvider>(context, listen: false);
@@ -28,6 +27,8 @@ class _TestState extends State<HomeFeed> {
     provider.showData();
     return Scaffold(
       appBar: AppBar(
+        title:const Text('Footware',style: TextStyle(color: Colors.black),),
+        centerTitle: true,
         actions: [
           Consumer<CartProvider>(
             builder: (context, cartProvider, _) {
@@ -64,7 +65,7 @@ class _TestState extends State<HomeFeed> {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    elevation: 1,
+                    elevation: 5,
                     color: Colors.amber,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(

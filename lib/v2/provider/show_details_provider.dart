@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/v2/data/model/product_details_model.dart';
-import 'package:footwear/v2/data/repository/show_product_detailsRepo.dart';
+import 'package:footwear/v2/data/repository/show_product_details_repo.dart';
 
-class ShowProductDetailsProvider extends ChangeNotifier{
-
+class ShowProductDetailsProvider extends ChangeNotifier {
   List<ProductDetailsModel> productList = [];
   int index = -1;
 
-  Future showData()async {
+  Future showData() async {
     productList = await ShowProductDetailsRepo.showData();
     notifyListeners();
   }
 
-  showImage(index){
+  showImage(index) {
     try {
-        var url = productList[index].imageUrl;
-        return url;
+      var url = productList[index].imageUrl;
+      return url;
     } catch (e) {
-        print("Error loading image: $e");
+      print("Error loading image: $e");
     }
   }
 
-
+  toggleIsAdded() {
+    productList[index].isAdded = true;
+    notifyListeners();
+  }
 }

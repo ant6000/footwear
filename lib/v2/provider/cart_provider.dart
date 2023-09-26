@@ -6,7 +6,6 @@ class CartProvider extends ChangeNotifier{
 
   addToCart(CartModel model){
     cartlist.add(model);
-    print('added ${cartlist.length}');
     notifyListeners();
   }
   removeFromCart(CartModel model){
