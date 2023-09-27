@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:footwear/v2/provider/cart_provider.dart';
+import 'package:footwear/v2/controller/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:footwear/v2/provider/show_details_provider.dart';
+import 'package:footwear/v2/controller/provider/show_details_provider.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});

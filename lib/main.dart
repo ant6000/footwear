@@ -6,12 +6,12 @@ import 'v1/provider/auth_provider.dart';
 import 'v1/provider/porduct_provider.dart';
 import 'v1/screens/login_screen.dart';
 import 'v1/screens/register_screen.dart';
-import 'v2/provider/show_details_provider.dart';
-import 'v2/provider/upload_provider.dart';
-import 'v2/screens/cart_page.dart';
-import 'v2/screens/home_feed.dart';
-import 'v2/provider/cart_provider.dart';
-import 'v2/screens/product_details_page.dart';
+import 'v2/controller/provider/show_details_provider.dart';
+import 'v2/controller/provider/upload_provider.dart';
+import 'v2/view/screens/cart_page.dart';
+import 'v2/view/screens/home_feed.dart';
+import 'v2/controller/provider/cart_provider.dart';
+import 'v2/view/screens/product_details_page.dart';
 
 
 void main() async {

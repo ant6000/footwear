@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footwear/v2/data/model/cart_model.dart';
-import 'package:footwear/v2/provider/cart_provider.dart';
-import 'package:footwear/v2/provider/show_details_provider.dart';
+import 'package:footwear/v2/controller/provider/cart_provider.dart';
+import 'package:footwear/v2/controller/provider/show_details_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsPage extends StatefulWidget {
