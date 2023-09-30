@@ -39,6 +39,17 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         Provider.of<ShowProductDetailsProvider>(context, listen: false);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Details'),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              
+            },
+            child: const Icon(Icons.favorite_outline)),
+          const SizedBox(width: 10),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -66,6 +77,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
+                    
                     Text(
                       productDetailsProvider.productList[productDetailsProvider.index].details.toString(),
                       //textAlign: TextAlign.justify,

@@ -11,7 +11,6 @@ class UploadProvider extends ChangeNotifier {
           imageUrl, productId, title, details, price, catagory);
       return true;
     } catch (e) {
-      print(e.toString());
       return false;
     }
   }

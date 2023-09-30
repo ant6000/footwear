@@ -9,8 +9,8 @@ import 'v1/screens/register_screen.dart';
 import 'v2/controller/provider/show_details_provider.dart';
 import 'v2/controller/provider/upload_provider.dart';
 import 'v2/view/screens/cart_page.dart';
-import 'v2/view/screens/home_feed.dart';
 import 'v2/controller/provider/cart_provider.dart';
+import 'v2/view/screens/home_page.dart';
 import 'v2/view/screens/product_details_page.dart';
 
 
@@ -34,6 +34,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => CartProvider(),
     ),
+
   ], child: const MainApp()));
 }
 
@@ -51,13 +52,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomeFeed(),
+        '/': (context) => const HomePage(),
         '/detailsPage': (context) => const ProductDetailsPage(),
         '/cartPage': (context) => const CartPage(),
         '/login':(context) => const LogIn(),
         '/register':(context) => const Register(),
-
-        //'/homepage':(context) =>const HomePage(),
       },
     );
   }

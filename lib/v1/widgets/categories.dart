@@ -19,7 +19,7 @@ class CategoriesWidgets extends StatelessWidget {
       builder: (BuildContext context, provider, Widget? child) {
         return Container(
           height: 50,
-          width: 140,
+          //width: 140,
           decoration: BoxDecoration(
             color: provider.categoriesList[index].isSelected
                 ? Colors.blue

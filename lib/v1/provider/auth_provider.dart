@@ -61,7 +61,7 @@ class AuthProvider extends ChangeNotifier {
       UserModel userDetails = await FirebaseAuthRepo.getUserDetails(email);
       return userDetails;
     } catch (e) {
-      print('Error fetching user details: $e');
+      debugPrint('Error fetching user details: $e');
       return null;
     }
   }

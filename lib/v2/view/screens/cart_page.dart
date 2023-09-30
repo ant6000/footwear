@@ -67,7 +67,7 @@ class CartPage extends StatelessWidget {
                 )
               : const Center(
                   child: Text(
-                  'Dont have any products added',
+                  'Cart is empty',
                   style: TextStyle(color: Colors.black, fontSize: 30),
                 ));
         }),

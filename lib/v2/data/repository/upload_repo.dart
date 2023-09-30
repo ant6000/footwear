@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:footwear/v2/data/model/product_upload_model.dart';
 
 class FirebaseUploadRepository {
@@ -15,16 +16,16 @@ class FirebaseUploadRepository {
           title: title,
           details: details,
           price: price,
-          catagory: catagory);
+          catagory: catagory,);
 
       _firebaseFirestore
           .collection(productCollection)
           .doc(productId)
           .set(addModel.toMap())
-          .onError(
-              (error, stackTrace) => print("Error writing document: $error"));
+          .onError((error, stackTrace) =>
+              debugPrint("Error writing document: $error"));
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

@@ -39,7 +39,6 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(selectedImage);
     final provider = Provider.of<UploadProvider>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
