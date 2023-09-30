@@ -12,13 +12,16 @@ class CategoryButton extends StatelessWidget {
         Provider.of<ShowProductDetailsProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        print('clicked $index');
         provider.onCategorySelected(index);
       },
       child: Container(
         height: 30,
         decoration: BoxDecoration(
-            color: Colors.blueAccent, borderRadius: BorderRadius.circular(20)),
+            color: provider.selectedCategoryIndex == index
+                ? Colors.blue
+                : Colors.transparent,
+            border: Border.all(width: 1),
+            borderRadius: BorderRadius.circular(20)),
         child: Center(child: Text('   $text   ')),
       ),
     );

@@ -16,7 +16,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ShowProductDetailsProvider>(context,listen: false);
+    final provider =
+        Provider.of<ShowProductDetailsProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
         provider.index = index;
@@ -44,12 +45,14 @@ class ProductCard extends StatelessWidget {
                       provider.index = index;
                       provider.toggleFavorite();
                     },
-                    child: Icon(provider.productList[index].isFav == true
-                        ? Icons.favorite
-                        : Icons.favorite_border_outlined,
-                        color: provider.productList[index].isFav == true
-                        ?Colors.pink
-                        :Colors.black,),
+                    child: Icon(
+                      provider.filteredProductList[index].isFav == true
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: provider.filteredProductList[index].isFav == true
+                          ? Colors.pink
+                          : Colors.black,
+                    ),
                   )
                 ],
               ),
@@ -73,7 +76,7 @@ class ProductCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 15),
                     ),
                     Text(
-                      '$price Tk',
+                      '$price \$',
                       style: const TextStyle(fontSize: 20),
                     ),
                   ],

@@ -54,7 +54,7 @@ class _UploadPageState extends State<UploadPage> {
                   height: 200,
                   width: 300,
                   decoration: BoxDecoration(
-                    image: selectedImage == null ? const DecorationImage(image: AssetImage('images/default_profile.jpg')): DecorationImage(image: FileImage(selectedImage!)),
+                    image: selectedImage == null ? const DecorationImage(image: AssetImage('images/default_profile_pic.png')): DecorationImage(image: FileImage(selectedImage!)),
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.black26),
                   child: IconButton(

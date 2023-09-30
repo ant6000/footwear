@@ -71,7 +71,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      productDetailsProvider.productList[productDetailsProvider.index].title,
+                      productDetailsProvider.filteredProductList[productDetailsProvider.index].title,
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.08,
                           fontWeight: FontWeight.bold),
@@ -79,7 +79,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     const SizedBox(height: 10),
                     
                     Text(
-                      productDetailsProvider.productList[productDetailsProvider.index].details.toString(),
+                      productDetailsProvider.filteredProductList[productDetailsProvider.index].details.toString(),
                       //textAlign: TextAlign.justify,
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -112,7 +112,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Price: ${productDetailsProvider.productList[productDetailsProvider.index].price}',
+                          'Price: ${productDetailsProvider.filteredProductList[productDetailsProvider.index].price}\$',
                           style: const TextStyle(
                             fontSize: 30,
                           ),
@@ -120,18 +120,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         Consumer<ShowProductDetailsProvider>(
                           builder: (context, provider,_) {
                             return ElevatedButton(
-                              onPressed: !provider.productList[productDetailsProvider.index].isAdded
+                              onPressed: !provider.filteredProductList[productDetailsProvider.index].isAdded
                                   ? () {
                                       provider.toggleIsAdded();
                                       cartProvider.addToCart(CartModel(
-                                          provider.productList[productDetailsProvider.index],
+                                          provider.filteredProductList[productDetailsProvider.index],
                                           value));
                                     }
                                   : null,
                               child: Row(
                                 children: [
                                   const Icon(Icons.shopping_cart),
-                                  !productDetailsProvider.productList[productDetailsProvider.index].isAdded
+                                  !productDetailsProvider.filteredProductList[productDetailsProvider.index].isAdded
                                       ? const Text('Add to Cart')
                                       : const Text('Already Added')
                                 ],

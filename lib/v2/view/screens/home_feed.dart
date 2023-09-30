@@ -12,6 +12,7 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _TestState extends State<HomeFeed> {
+  TextEditingController searchString = TextEditingController();
   // @override
   // void initState() {
   //   super.initState();
@@ -31,12 +32,18 @@ class _TestState extends State<HomeFeed> {
       child: Column(
         children: [
           SizedBox(
-            height: 50,
+            height: 40,
             child: TextField(
+              controller: searchString,
+              onChanged: (value) {
+                provider1.searchItems(value);
+              },
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  hintText: 'Search here'),
+                  hintText: 'Search here',
+                  alignLabelWithHint: true,
+                  ),
             ),
           ),
           const SizedBox(height: 10),
@@ -83,7 +90,8 @@ class _TestState extends State<HomeFeed> {
                           index: index,
                           title: provider.filteredProductList[index].title,
                           price: provider.filteredProductList[index].price,
-                          imageUrl: provider.filteredProductList[index].imageUrl,
+                          imageUrl:
+                              provider.filteredProductList[index].imageUrl,
                         );
                       },
                     ),

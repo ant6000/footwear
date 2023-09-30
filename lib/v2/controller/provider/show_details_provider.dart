@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:footwear/v2/data/model/category_model.dart';
 import 'package:footwear/v2/data/model/product_details_model.dart';
@@ -13,26 +14,38 @@ class ShowProductDetailsProvider extends ChangeNotifier {
 
   List<ProductDetailsModel> filteredProductList = [];
 
+  int selectedCategoryIndex = 0;
+
   Future showData() async {
     productList = await ShowProductDetailsRepo.showData();
+    filteredProductList = productList;
     notifyListeners();
   }
 
   Future showCategoryList() async {
     categoryList = await ShowProductDetailsRepo.showCategory();
+    categoryList.sort((a, b) => a.index.compareTo(b.index));
     notifyListeners();
   }
 
   onCategorySelected(int index) {
-    int selectedCategoryIndex = index;
-    if (index == 0) {
+    selectedCategoryIndex = index;
+    if (selectedCategoryIndex == 0) {
       filteredProductList = productList;
     } else {
       filteredProductList = productList
-      .where((product) => 
-      product.category == categoryList[selectedCategoryIndex].name)
-      .toList();
+          .where((product) =>
+              product.category == categoryList[selectedCategoryIndex].name)
+          .toList();
     }
+    notifyListeners();
+  }
+
+  void searchItems(String value) {
+    filteredProductList = productList
+        .where((product) =>
+            product.title.toLowerCase().contains(value.toLowerCase()))
+        .toList();
     notifyListeners();
   }
 
@@ -46,7 +59,7 @@ class ShowProductDetailsProvider extends ChangeNotifier {
   }
 
   toggleIsAdded() {
-    productList[index].isAdded = true;
+    filteredProductList[index].isAdded = true;
     notifyListeners();
   }
 

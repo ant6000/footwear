@@ -25,6 +25,7 @@ class _FavouritePageState extends State<FavouritePage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     child: ListTile(
+                      onTap: () => Navigator.pushNamed(context, '/detailsPage'),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       textColor: Colors.white,
