@@ -67,7 +67,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.amber,
                       ),
-                      //child: provider.productList.isNotEmpty ? Image.network(provider.productList[provider.index].imageUrl) : const CircularProgressIndicator(),
+                      child: productDetailsProvider.filteredProductList.isNotEmpty ? Image.network(productDetailsProvider.filteredProductList[productDetailsProvider.index].imageUrl) : const CircularProgressIndicator(),
                     ),
                     const SizedBox(height: 10),
                     Text(

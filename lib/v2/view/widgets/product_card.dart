@@ -63,8 +63,8 @@ class ProductCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(365),
                         color: Colors.lightBlue),
                     child: imageUrl.isNotEmpty
-                        ? Image.asset('images/snikers1.png')
-                        : Image.network(imageUrl),
+                        ? Image.network(imageUrl)
+                        :const CircularProgressIndicator()
                   )),
               Expanded(
                 flex: 1,
@@ -77,7 +77,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     Text(
                       '$price \$',
-                      style: const TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 15),
                     ),
                   ],
                 ),
