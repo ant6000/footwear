@@ -7,6 +7,7 @@ import 'package:footwear/v2/data/repository/show_product_details_repo.dart';
 class ShowProductDetailsProvider extends ChangeNotifier {
   List<ProductDetailsModel> productList = [];
   int index = -1;
+  String productId = '';
 
   List<ProductDetailsModel> favriteList = [];
 
@@ -49,19 +50,16 @@ class ShowProductDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  showImage(index) {
-    try {
-      var url = productList[index].imageUrl;
-      return url;
-    } catch (e) {
-      debugPrint("Error loading image: $e");
-    }
-  }
+  // showImage(index) {
+  //   try {
+  //     var url = productList[index].imageUrl;
+  //     return url;
+  //   } catch (e) {
+  //     debugPrint("Error loading image: $e");
+  //   }
+  // }
 
-  toggleIsAdded() {
-    filteredProductList[index].isAdded = true;
-    notifyListeners();
-  }
+
 
   toggleFavorite() {
     // when user clicked to like button item isFavourite will true and item will add to favorite list
@@ -93,5 +91,13 @@ class ShowProductDetailsProvider extends ChangeNotifier {
   removeFromFavoriteList() {
     favriteList.remove(productList[index]);
     notifyListeners();
+  }
+
+
+  int detailsPageFromFavlist(int index){
+   final id = favriteList[index].productId ;
+   final targetIndex = filteredProductList.indexWhere((element) => element.productId == id);
+   notifyListeners();
+   return targetIndex;
   }
 }

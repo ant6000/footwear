@@ -25,7 +25,10 @@ class _FavouritePageState extends State<FavouritePage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     child: ListTile(
-                      onTap: () => Navigator.pushNamed(context, '/detailsPage'),
+                      onTap: () {
+                        favoriteProvider.index =  favoriteProvider.detailsPageFromFavlist(index);
+                        Navigator.pushNamed(context, '/detailsPage');
+                      },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       textColor: Colors.white,
@@ -35,17 +38,19 @@ class _FavouritePageState extends State<FavouritePage> {
                       subtitle: Text(
                           favoriteProvider.favriteList[index].price.toString(),
                           style: const TextStyle(fontSize: 20)),
-                      leading: Container(
-                          height: 200, width: 100, color: Colors.orange),
+                      leading: Image.network(favoriteProvider.favriteList[index].imageUrl),
                     ),
                   );
                 },
               )
             : const Center(
-                child: Text(
-                'Your liked Products will appear here',
-                style: TextStyle(color: Colors.black, fontSize: 30),
-              ));
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                  child: Text(
+                  'No Favourites added',
+                  style: TextStyle(color: Colors.black, fontSize: 30),
+                              ),
+                ));
       }),
     );
   }

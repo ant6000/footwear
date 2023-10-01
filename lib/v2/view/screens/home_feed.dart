@@ -39,6 +39,7 @@ class _TestState extends State<HomeFeed> {
                 provider1.searchItems(value);
               },
               decoration: InputDecoration(
+                contentPadding:const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
                   hintText: 'Search here',
@@ -79,7 +80,7 @@ class _TestState extends State<HomeFeed> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: .7,
+                        childAspectRatio: .6,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
                       ),

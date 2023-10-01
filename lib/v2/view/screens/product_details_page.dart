@@ -41,12 +41,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
+        centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () {
-              
-            },
-            child: const Icon(Icons.favorite_outline)),
+              onTap: () {}, child: const Icon(Icons.favorite_outline)),
           const SizedBox(width: 10),
         ],
       ),
@@ -55,43 +53,53 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
                     Container(
-                      height: 300,
+                      height: 250,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.amber,
                       ),
-                      child: productDetailsProvider.filteredProductList.isNotEmpty ? Image.network(productDetailsProvider.filteredProductList[productDetailsProvider.index].imageUrl) : const CircularProgressIndicator(),
+                      child: productDetailsProvider
+                              .filteredProductList.isNotEmpty
+                          ? Image.network(productDetailsProvider
+                              .filteredProductList[productDetailsProvider.index]
+                              .imageUrl)
+                          : const CircularProgressIndicator(),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      productDetailsProvider.filteredProductList[productDetailsProvider.index].title,
+                      productDetailsProvider
+                          .filteredProductList[productDetailsProvider.index]
+                          .title,
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.08,
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
-                    
                     Text(
-                      productDetailsProvider.filteredProductList[productDetailsProvider.index].details.toString(),
-                      //textAlign: TextAlign.justify,
+                      productDetailsProvider
+                          .filteredProductList[productDetailsProvider.index]
+                          .details
+                          .toString(),
+                      textAlign: TextAlign.justify,
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.04,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
                         const Text(
                           'Size: ',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 30),
                         ),
                         customRadioButton('5', 1),
                         const SizedBox(width: 5),
@@ -105,6 +113,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         const SizedBox(width: 5),
                         customRadioButton('10', 6),
                         const SizedBox(width: 5),
+                        customRadioButton('11', 7),
+                        const SizedBox(width: 5),
+                        customRadioButton('12', 8),
+                        const SizedBox(width: 5),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -113,38 +125,47 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       children: [
                         Text(
                           'Price: ${productDetailsProvider.filteredProductList[productDetailsProvider.index].price}\$',
-                          style: const TextStyle(
-                            fontSize: 30,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.07,
                           ),
                         ),
                         Consumer<ShowProductDetailsProvider>(
-                          builder: (context, provider,_) {
-                            return ElevatedButton(
-                              onPressed: !provider.filteredProductList[productDetailsProvider.index].isAdded
+                            builder: (context, provider, _) {
+                          return SizedBox(
+                            width: 150,
+                            child: ElevatedButton(
+                              onPressed: !provider
+                                      .filteredProductList[
+                                          productDetailsProvider.index]
+                                      .isAdded
                                   ? () {
-                                      provider.toggleIsAdded();
                                       cartProvider.addToCart(CartModel(
-                                          provider.filteredProductList[productDetailsProvider.index],
-                                          value));
+                                          provider.filteredProductList[
+                                              productDetailsProvider.index],
+                                          value,1));
                                     }
                                   : null,
                               child: Row(
                                 children: [
                                   const Icon(Icons.shopping_cart),
-                                  !productDetailsProvider.filteredProductList[productDetailsProvider.index].isAdded
+                                  !productDetailsProvider
+                                          .filteredProductList[
+                                              productDetailsProvider.index]
+                                          .isAdded
                                       ? const Text('Add to Cart')
-                                      : const Text('Already Added')
+                                      : const Text('Added'),
                                 ],
                               ),
-                            );
-                          }
-                        ),
+                            ),
+                          );
+                        }),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
+            const SizedBox(height: 10),
           ],
         ),
       ),

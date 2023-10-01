@@ -25,11 +25,13 @@ class ProductCard extends StatelessWidget {
       },
       child: Card(
         shadowColor: Colors.black,
-        elevation: 5,
+        elevation: 10,
         color: Colors.amber,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,10 +60,8 @@ class ProductCard extends StatelessWidget {
               ),
               Expanded(
                   flex: 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(365),
-                        color: Colors.lightBlue),
+                  child: CircleAvatar(
+                    radius: 100,
                     child: imageUrl.isNotEmpty
                         ? Image.network(imageUrl)
                         :const CircularProgressIndicator()
@@ -69,15 +69,18 @@ class ProductCard extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 10),
                     Text(
                       title,
-                      style: const TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.04,
+                      letterSpacing: 1,height: 1),
                     ),
                     Text(
                       '$price \$',
-                      style: const TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.04),
                     ),
                   ],
                 ),
