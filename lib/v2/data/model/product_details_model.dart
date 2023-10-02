@@ -8,7 +8,6 @@ class ProductDetailsModel {
   double price;
   String category;
   bool? isFav;
-  bool isAdded;
   ProductDetailsModel(
       {required this.productId,
       required this.imageUrl,
@@ -16,8 +15,7 @@ class ProductDetailsModel {
       this.details,
       required this.price,
       required this.category,
-      this.isFav,
-      this.isAdded = false});
+      this.isFav});
 
   toJson() {
     return {

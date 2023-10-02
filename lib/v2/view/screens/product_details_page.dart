@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:footwear/v2/data/model/cart_model.dart';
 import 'package:footwear/v2/controller/provider/cart_provider.dart';
 import 'package:footwear/v2/controller/provider/show_details_provider.dart';
@@ -134,26 +135,32 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           return SizedBox(
                             width: 150,
                             child: ElevatedButton(
-                              onPressed: !provider
-                                      .filteredProductList[
-                                          productDetailsProvider.index]
-                                      .isAdded
-                                  ? () {
-                                      cartProvider.addToCart(CartModel(
-                                          provider.filteredProductList[
-                                              productDetailsProvider.index],
-                                          value,1));
-                                    }
-                                  : null,
-                              child: Row(
+                              onPressed: () {
+                                bool result = cartProvider.addToCart(CartModel(
+                                    provider.filteredProductList[
+                                        productDetailsProvider.index],
+                                    value,
+                                    1));
+                                if (result) {
+                                  Fluttertoast.showToast(
+                                      msg: 'Added',
+                                      backgroundColor: Colors.amber,
+                                      textColor: Colors.white,
+                                      gravity: ToastGravity.BOTTOM,
+                                      toastLength: Toast.LENGTH_SHORT);
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: 'Alreaded added',
+                                      backgroundColor: Colors.amber,
+                                      textColor: Colors.white,
+                                      gravity: ToastGravity.BOTTOM,
+                                      toastLength: Toast.LENGTH_SHORT);
+                                }
+                              },
+                              child: const Row(
                                 children: [
-                                  const Icon(Icons.shopping_cart),
-                                  !productDetailsProvider
-                                          .filteredProductList[
-                                              productDetailsProvider.index]
-                                          .isAdded
-                                      ? const Text('Add to Cart')
-                                      : const Text('Added'),
+                                  Icon(Icons.shopping_cart),
+                                  Text('Add to Cart')
                                 ],
                               ),
                             ),

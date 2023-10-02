@@ -17,12 +17,13 @@ class ShowProductDetailsProvider extends ChangeNotifier {
 
   int selectedCategoryIndex = 0;
 
+  // data comess from firebase
   Future showData() async {
     productList = await ShowProductDetailsRepo.showData();
     filteredProductList = productList;
     notifyListeners();
   }
-
+  // data comess from firebase
   Future showCategoryList() async {
     categoryList = await ShowProductDetailsRepo.showCategory();
     categoryList.sort((a, b) => a.index.compareTo(b.index));
@@ -42,6 +43,7 @@ class ShowProductDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+ // searching items on favourite list
   void searchItems(String value) {
     filteredProductList = productList
         .where((product) =>
@@ -95,8 +97,8 @@ class ShowProductDetailsProvider extends ChangeNotifier {
 
 
   int detailsPageFromFavlist(int index){
-   final id = favriteList[index].productId ;
-   final targetIndex = filteredProductList.indexWhere((element) => element.productId == id);
+   //final id = favriteList[index].productId ;
+   final targetIndex = filteredProductList.indexWhere((element) => element.productId == favriteList[index].productId);
    notifyListeners();
    return targetIndex;
   }
