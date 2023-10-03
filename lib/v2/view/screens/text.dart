@@ -19,7 +19,7 @@ class MyWidget extends StatelessWidget {
     );
   },
   errorBuilder: (context, error, stackTrace) {
-    return Text('Error loading image');
+    return const Text('Error loading image');
   },
 )
 

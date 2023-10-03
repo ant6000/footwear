@@ -137,10 +137,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             child: ElevatedButton(
                               onPressed: () {
                                 bool result = cartProvider.addToCart(CartModel(
-                                    provider.filteredProductList[
-                                        productDetailsProvider.index],
-                                    value,
-                                    1));
+                                    provider.filteredProductList[productDetailsProvider.index],
+                                    value,1));
                                 if (result) {
                                   Fluttertoast.showToast(
                                       msg: 'Added',

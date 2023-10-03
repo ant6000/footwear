@@ -16,79 +16,90 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider =
-        Provider.of<ShowProductDetailsProvider>(context, listen: false);
-    return GestureDetector(
-      onTap: () {
-        provider.index = index;
-        Navigator.pushNamed(context, '/detailsPage');
-      },
-      child: Card(
-        shadowColor: Colors.black,
-        elevation: 10,
-        color: Colors.amber,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromRGBO(244, 67, 54, 1)),
-                    child: const Text('-30%'),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      provider.index = index;
-                      provider.toggleFavorite();
-                    },
-                    child: Icon(
-                      provider.filteredProductList[index].isFav == true
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined,
-                      color: provider.filteredProductList[index].isFav == true
-                          ? Colors.pink
-                          : Colors.black,
-                    ),
-                  )
-                ],
-              ),
-              Expanded(
-                  flex: 2,
-                  child: CircleAvatar(
-                    radius: 100,
-                    child: imageUrl.isNotEmpty
-                        ? Image.network(imageUrl)
-                        :const CircularProgressIndicator()
-                  )),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    return Consumer<ShowProductDetailsProvider>(
+        builder: (context, provider, _) {
+      bool isFavorite = provider
+          .isProductFavorite(provider.filteredProductList[index].productId);
+      return GestureDetector(
+        onTap: () {
+          provider.index = index;
+          Navigator.pushNamed(context, '/detailsPage');
+        },
+        child: Card(
+          shadowColor: Colors.black,
+          elevation: 10,
+          color: Colors.amber,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(height: 10),
-                    Text(
-                      title,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.04,
-                      letterSpacing: 1,height: 1),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromRGBO(244, 67, 54, 1)),
+                      child: const Text('-30%'),
                     ),
-                    Text(
-                      '$price \$',
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.04),
-                    ),
+                    GestureDetector(
+                      onTap: () {
+                        provider.index = index;
+                        String productId =
+                            provider.filteredProductList[index].productId;
+                        provider.toggleFavorite(
+                            productId); // Toggle favorite status
+                      },
+                      child: Icon(
+                        isFavorite
+                            ? Icons
+                                .favorite // If the item is in the favorite list, show the filled heart icon
+                            : Icons
+                                .favorite_border_outlined, // If not, show the outlined heart icon
+                        color: isFavorite
+                            ? Colors
+                                .pink // If the item is in the favorite list, use the pink color
+                            : Colors.black, // If not, use the black color
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ],
+                Expanded(
+                    flex: 2,
+                    child: CircleAvatar(
+                        radius: 100,
+                        child: imageUrl.isNotEmpty
+                            ? Image.network(imageUrl)
+                            : const CircularProgressIndicator())),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 10),
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                            letterSpacing: 1,
+                            height: 1),
+                      ),
+                      Text(
+                        '$price \$',
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.04),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

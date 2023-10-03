@@ -24,33 +24,56 @@ class _FavouritePageState extends State<FavouritePage> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
-                    child: ListTile(
-                      onTap: () {
-                        favoriteProvider.index =  favoriteProvider.detailsPageFromFavlist(index);
-                        Navigator.pushNamed(context, '/detailsPage');
+                    child: Dismissible(
+                      key: UniqueKey(),
+                      background: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.green,
+                        ),
+                      ),
+                      secondaryBackground: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red,
+                        ),
+                        child:const Icon(Icons.delete),
+                      ),
+                      onDismissed: (direction) {
+                        favoriteProvider.removeFromFavoriteList(index);
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      textColor: Colors.white,
-                      tileColor: Colors.amber,
-                      title: Text(favoriteProvider.favriteList[index].title,
-                          style: const TextStyle(fontSize: 25)),
-                      subtitle: Text(
-                          favoriteProvider.favriteList[index].price.toString(),
-                          style: const TextStyle(fontSize: 20)),
-                      leading: Image.network(favoriteProvider.favriteList[index].imageUrl),
+                      direction: DismissDirection.endToStart,
+                      child: ListTile(
+                        onTap: () {
+                          favoriteProvider.index =
+                              favoriteProvider.detailsPageFromFavlist(index);
+                          Navigator.pushNamed(context, '/detailsPage');
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        textColor: Colors.white,
+                        tileColor: Colors.amber,
+                        title: Text(favoriteProvider.favriteList[index].title,
+                            style: const TextStyle(fontSize: 25)),
+                        subtitle: Text(
+                            favoriteProvider.favriteList[index].price
+                                .toString(),
+                            style: const TextStyle(fontSize: 20)),
+                        leading: Image.network(
+                            favoriteProvider.favriteList[index].imageUrl),
+                      ),
                     ),
                   );
                 },
               )
             : const Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                  child: Text(
-                  'No Favourites added',
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Text(
+                  'No Favourite item',
                   style: TextStyle(color: Colors.black, fontSize: 30),
-                              ),
-                ));
+                ),
+              ));
       }),
     );
   }
