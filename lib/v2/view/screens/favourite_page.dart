@@ -40,7 +40,7 @@ class _FavouritePageState extends State<FavouritePage> {
                         child:const Icon(Icons.delete),
                       ),
                       onDismissed: (direction) {
-                        favoriteProvider.removeFromFavoriteList(index);
+                        favoriteProvider.removeFromFavList(favoriteProvider.favriteList[index].productId);
                       },
                       direction: DismissDirection.endToStart,
                       child: ListTile(

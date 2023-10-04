@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:footwear/v1/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:footwear/v2/controller/provider/auth_provider.dart';
 
-class LogIn extends StatelessWidget {
-  const LogIn({super.key});
+class LogInPage extends StatefulWidget {
+  const LogInPage({super.key});
+
+  @override
+  State<LogInPage> createState() => _LogInPageState();
+}
+
+class _LogInPageState extends State<LogInPage> {
+  final TextEditingController loginEmailController = TextEditingController();
+
+  final TextEditingController loginpPasswordController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    loginEmailController.dispose();
+    loginpPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    navigateRoute() => Navigator.pushReplacementNamed(context, '/homepage');
+    navigateRoute() => Navigator.pushReplacementNamed(context, '/homePage');
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -18,13 +35,13 @@ class LogIn extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         'Shop your\nDream shoe from\nLargest collection',
                         style: TextStyle(
-                            fontSize: 40,
+                            fontSize: MediaQuery.of(context).size.width * 0.1,
                             color: Colors.pink,
                             fontWeight: FontWeight.bold),
                       )
@@ -48,7 +65,7 @@ class LogIn extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, '/register');
+                          Navigator.popAndPushNamed(context, '/registerPage');
                         },
                         child: const Text(
                           'Register account',
@@ -59,7 +76,7 @@ class LogIn extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    controller: provider.loginEmailController,
+                    controller: loginEmailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         labelText: 'Enter email',
@@ -71,12 +88,16 @@ class LogIn extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: TextField(
-                      controller: provider.loginpPasswordController,
+                      controller: loginpPasswordController,
+                      obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
                           labelText: 'Enter Password',
-                          hintText: 'Enter your Password',
+                          hintText: 'Enter Password',
                           prefixIcon: const Icon(Icons.password),
+                          suffixIcon: GestureDetector(
+                              onTap: () {},
+                              child: const Icon(Icons.remove_red_eye)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20))),
                     ),
@@ -88,7 +109,7 @@ class LogIn extends StatelessWidget {
                           onTap: () {},
                           child: const Text(
                             'Forgot Pasword?',
-                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                            style: TextStyle(color: Colors.red, fontSize: 20),
                           )),
                     ],
                   ),
@@ -99,17 +120,17 @@ class LogIn extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         bool result = await provider.loginAccount(
-                            provider.loginEmailController.text,
-                            provider.loginpPasswordController.text);
+                            loginEmailController.text,
+                            loginpPasswordController.text);
                         const CircularProgressIndicator(
                           backgroundColor: Colors.black,
                           color: Colors.amber,
                         );
                         if (result) {
+                          await provider
+                              .showProfileInfo(loginEmailController.text);
                           navigateRoute();
                         } else {
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //     SnackBar(content: Text('login failed')));
                           Fluttertoast.showToast(
                               msg: 'login failed',
                               toastLength: Toast.LENGTH_SHORT,

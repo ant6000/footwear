@@ -35,6 +35,7 @@ class _TestState extends State<HomeFeed> {
             height: 40,
             child: TextField(
               controller: searchString,
+              keyboardType: TextInputType.text,
               onChanged: (value) {
                 provider1.searchItems(value);
               },

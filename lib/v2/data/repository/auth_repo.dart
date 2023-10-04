@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:footwear/v1/data/model/user_model.dart';
+import 'package:flutter/material.dart';
+import 'package:footwear/v2/data/model/user_model.dart';
 
 class FirebaseAuthRepo {
   static final FirebaseFirestore _database = FirebaseFirestore.instance;
@@ -55,20 +56,23 @@ class FirebaseAuthRepo {
         .set(userModel.toMap());
   }
 
-  static Future<UserModel> getUserDetails(String email) async {
-    try {
-      final snapshot = await _database
-          .collection(collectionUser)
-          .where('email', isEqualTo: email)
-          .get();
-      if (snapshot.docs.isNotEmpty) {
-        //print(snapshot.docs.first.data());
-        return UserModel.fromMap(snapshot.docs.first.data());
-      } else {
-        throw Exception('User data not found');
-      }
-    } catch (e) {
-      throw Exception('Error fetching user data: $e');
+  static Future<UserModel?> getUserDetails(String email) async {
+  try {
+    final  querySnapshot = await _database
+        .collection(collectionUser)
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final DocumentSnapshot userDocument = querySnapshot.docs.first;
+      final Map<String, dynamic> userData = userDocument.data() as Map<String, dynamic>;
+      return  UserModel.fromMap(userData);
+    } else {
+      return null;
     }
+  } catch (e) {
+    debugPrint('repo Error fetching user data: $e');
+    return null;
   }
+}
 }

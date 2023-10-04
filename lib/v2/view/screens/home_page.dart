@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
           Consumer<CartProvider>(builder: (context, cartProvider, _) {
             return Padding(

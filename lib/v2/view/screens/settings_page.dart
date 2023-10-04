@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:footwear/v2/controller/provider/show_details_provider.dart';
-import 'package:footwear/v2/view/widgets/setting_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:footwear/v2/controller/provider/auth_provider.dart';
+import 'package:footwear/v2/view/widgets/setting_tile.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child:
-          Consumer<ShowProductDetailsProvider>(builder: (context, provider, _) {
-        //provider.checkedLoginorNot;
-        return Column(
+    return Consumer<AuthProvider>(builder: (context, provider, _) {
+      return SingleChildScrollView(
+        child: Column(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 80,
               backgroundColor: Colors.amber,
-              // backgroundImage: provider.authModel!.profilePic == ''
-              //     ? const AssetImage('images/snikers1.png') as ImageProvider
-              //     : NetworkImage(provider.authModel!.profilePic),
+              backgroundImage: provider.authModel?.profilePic != null
+                  ? NetworkImage(provider.authModel?.profilePic ?? '')
+                  : const AssetImage('images/default_profile_pic.png')
+                      as ImageProvider,
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Antor',
-              style: TextStyle(fontSize: 30),
+            Text(
+              provider.authModel?.name ?? '',
+              style: const TextStyle(fontSize: 30),
             ),
-            const Text('antor@gmai.com', style: TextStyle(fontSize: 20)),
+            Text(provider.authModel?.email ?? '',
+                style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 10),
             SizedBox(
               width: 200,
@@ -105,11 +106,14 @@ class SettingsPage extends StatelessWidget {
               color: Colors.red,
               icon: Icons.logout,
               endIcon: false,
-              onpress: () {},
+              onpress: () {
+                provider.logOut();
+                Navigator.pushReplacementNamed(context, '/loginPage');
+              },
             ),
           ],
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

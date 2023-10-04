@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:footwear/v1/data/model/catagory_model.dart';
 import 'package:footwear/v2/controller/provider/show_details_provider.dart';
+import 'package:footwear/v2/data/model/product_details_model.dart';
 import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
@@ -18,8 +20,6 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ShowProductDetailsProvider>(
         builder: (context, provider, _) {
-      bool isFavorite = provider
-          .isProductFavorite(provider.filteredProductList[index].productId);
       return GestureDetector(
         onTap: () {
           provider.index = index;
@@ -49,16 +49,15 @@ class ProductCard extends StatelessWidget {
                         provider.index = index;
                         String productId =
                             provider.filteredProductList[index].productId;
-                        provider.toggleFavorite(
-                            productId); // Toggle favorite status
+                            provider.toggleLike(productId); // Toggle favorite status
                       },
                       child: Icon(
-                        isFavorite
+                        provider.isProductLiked(provider.filteredProductList[index].productId)
                             ? Icons
                                 .favorite // If the item is in the favorite list, show the filled heart icon
                             : Icons
                                 .favorite_border_outlined, // If not, show the outlined heart icon
-                        color: isFavorite
+                        color: provider.isProductLiked(provider.filteredProductList[index].productId)
                             ? Colors
                                 .pink // If the item is in the favorite list, use the pink color
                             : Colors.black, // If not, use the black color

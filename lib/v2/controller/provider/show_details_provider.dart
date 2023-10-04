@@ -17,7 +17,7 @@ class ShowProductDetailsProvider extends ChangeNotifier {
 
   int selectedCategoryIndex = 0;
 
-  Set<String> favoriteProductIds = Set<String>();
+  Set<String> likedProductIds = <String>{};
 
   // data comess from firebase
   Future showData() async {
@@ -55,37 +55,36 @@ class ShowProductDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Toggle favorite status for a product by its productId
-  void toggleFavorite(String productId) {
-    if (favoriteProductIds.contains(productId)) {
-      // If the product is already in favorites, remove it
-      favoriteProductIds.remove(productId);
-      removeFromFavoriteList(index);
+  void toggleLike(String productId) {
+    if (likedProductIds.contains(productId)) {
+      likedProductIds.remove(productId);
+      removeFromFavList(productId);
     } else {
-      // If the product is not in favorites, add it
-      favoriteProductIds.add(productId);
-      addToFavoriteList();
+      likedProductIds.add(productId);
+      addToFavoriteList(filteredProductList[index]);
     }
     notifyListeners();
   }
 
-  // Check if a product is in favorites by its productId
-  bool isProductFavorite(String productId) {
-    return favoriteProductIds.contains(productId);
+  bool isProductLiked(String productId) {
+    return likedProductIds.contains(productId);
   }
 
-  addToFavoriteList() {
-    favriteList.add(filteredProductList[index]);
+  addToFavoriteList(ProductDetailsModel model) {
+    favriteList.add(model);
     notifyListeners();
   }
 
-  removeFromFavoriteList(int index) {
-    favriteList.remove(favriteList[index]);
+  removeFromFavList(String productId) {
+    final targetIndex = favriteList
+        .indexWhere((element) => element.productId == productId);
+    print(targetIndex);
+    favriteList.remove(favriteList[targetIndex]);
+    likedProductIds.remove(productId);
     notifyListeners();
   }
 
   int detailsPageFromFavlist(int index) {
-    //final id = favriteList[index].productId ;
     final targetIndex = filteredProductList.indexWhere(
         (element) => element.productId == favriteList[index].productId);
     notifyListeners();

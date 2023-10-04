@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:footwear/v1/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:footwear/v2/controller/provider/auth_provider.dart';
 
-class Register extends StatelessWidget {
-  const Register({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    navigateRoute() => Navigator.pushReplacementNamed(context, '/homepage');
+    navigateRoute() => Navigator.popAndPushNamed(context, '/homePage');
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -18,13 +32,13 @@ class Register extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         'Shop your \nDream shoe from\nLargest collection',
                         style: TextStyle(
-                            fontSize: 40,
+                            fontSize: MediaQuery.of(context).size.width * 0.1,
                             color: Colors.pink,
                             fontWeight: FontWeight.bold),
                       )
@@ -36,7 +50,7 @@ class Register extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.popAndPushNamed(context, '/loginPage');
                         },
                         child: const Text(
                           'Already have an account?',
@@ -47,7 +61,8 @@ class Register extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    controller: provider.nameController,
+                    controller: nameController,
+                    keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         hintText: 'Full Name',
                         prefixIcon: const Icon(Icons.abc),
@@ -56,7 +71,8 @@ class Register extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    controller: provider.emailController,
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         hintText: 'Email',
                         prefixIcon: const Icon(Icons.mail),
@@ -65,19 +81,27 @@ class Register extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    controller: provider.passwordController,
+                    controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     decoration: InputDecoration(
                         hintText: 'Enter Password',
                         prefixIcon: const Icon(Icons.password),
+                        suffixIcon: GestureDetector(
+                            child: const Icon(Icons.remove_red_eye)),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    controller: provider.confirmPasswordController,
+                    controller: confirmPasswordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     decoration: InputDecoration(
                         hintText: 'Confirm Password',
                         prefixIcon: const Icon(Icons.password),
+                        suffixIcon: GestureDetector(
+                            child: const Icon(Icons.remove_red_eye)),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
                   ),
@@ -88,9 +112,9 @@ class Register extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         bool result = await provider.registerAccount(
-                            provider.nameController.text,
-                            provider.emailController.text,
-                            provider.passwordController.text);
+                            nameController.text,
+                            emailController.text,
+                            passwordController.text);
 
                         if (result) {
                           navigateRoute();
@@ -118,5 +142,14 @@ class Register extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 }

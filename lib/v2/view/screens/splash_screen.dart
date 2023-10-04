@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:footwear/utility/shared_pref.dart';
-import 'package:footwear/v1/screens/home_page.dart';
+import 'package:footwear/v2/controller/provider/auth_provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,22 +17,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    checkUserStatus();
+    final provider = Provider.of<AuthProvider>(context,listen: false);
+    Timer(Duration(seconds: 3), () { 
+    checkUserStatus(provider);
+    });
   }
-
-  void checkUserStatus() async {
+  
+  void checkUserStatus(AuthProvider provider) async {
     var pref = SharedPref();
     var value = await pref.readUserData();
-    //navigateToLoginScreen();
-    value != '' ? const HomePage() : navigateToLoginScreen();
+    //print(value);
+    if (value != '') {
+    provider.checkedLoginorNot(value);
+    }
+    value != '' ? navigateToHomePage() : navigaTologinpage();
   }
 
-  navigateRoute() => Navigator.pushReplacementNamed(context, '/login');
-
-  Future<void> navigateToLoginScreen() async {
-    await Future.delayed(const Duration(seconds: 3)); // Wait for 3 seconds
-    navigateRoute();
-  }
+  navigateToHomePage() => Navigator.pushReplacementNamed(context, '/homePage');
+  navigaTologinpage() => Navigator.pushReplacementNamed(context, '/loginPage');
 
   @override
   Widget build(BuildContext context) {

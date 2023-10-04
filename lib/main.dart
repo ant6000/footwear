@@ -2,16 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'v1/provider/auth_provider.dart';
-import 'v1/provider/porduct_provider.dart';
-import 'v1/screens/login_screen.dart';
-import 'v1/screens/register_screen.dart';
+import 'v2/view/screens/home_page.dart';
+import 'v2/view/screens/register_screen.dart';
+import 'v2/controller/provider/auth_provider.dart';
 import 'v2/controller/provider/show_details_provider.dart';
 import 'v2/controller/provider/upload_provider.dart';
 import 'v2/view/screens/cart_page.dart';
 import 'v2/controller/provider/cart_provider.dart';
-import 'v2/view/screens/home_page.dart';
+import 'v2/view/screens/login_screen.dart';
 import 'v2/view/screens/product_details_page.dart';
+import 'v2/view/screens/splash_screen.dart';
 
 
 void main() async {
@@ -19,9 +19,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform);
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => ProductProvider(),
-    ),
     ChangeNotifierProvider(
       create: (context) => AuthProvider(),
     ),
@@ -52,11 +49,12 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => const SplashScreen(),
+        '/loginPage': (context) => const  LogInPage(),
+        '/registerPage': (context) => const  RegisterPage(),
+        '/homePage': (context) => const HomePage(),
         '/detailsPage': (context) => const ProductDetailsPage(),
         '/cartPage': (context) => const CartPage(),
-        '/login':(context) => const LogIn(),
-        '/register':(context) => const Register(),
       },
     );
   }

@@ -66,13 +66,8 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> checkedLoginorNot() async {
-    final pref = SharedPref();
-    final String email = await pref.readUserData();
-    if (email != '') {
-      var userData = showProfileInfo(email);
-      _authModel = await userData;
-      notifyListeners();
-    }
+  void checkedLoginorNot(String email)  {
+    print('object');
+      showProfileInfo(email);    
   }
 }
